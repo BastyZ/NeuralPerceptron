@@ -8,7 +8,7 @@ abstract class AbstractPerceptronTest {
     protected lateinit var inputs10: List<Int>
     protected lateinit var inputs01: List<Int>
     protected lateinit var inputs00: List<Int>
-    protected lateinit var pesos: List<Double>
+    protected lateinit var pesos: Array<Double>
 
     @BeforeEach
     fun setUp() {

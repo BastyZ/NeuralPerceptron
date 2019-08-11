@@ -8,7 +8,7 @@ internal class AndPerceptronTest: AbstractPerceptronTest() {
 
     @Test
     fun computeBias() {
-        pesos = listOf(1.0,1.0)
+        pesos = arrayOf(1.0,1.0)
         val neuron = AndPerceptron(pesos,2.0 - super.tolerance)
         assertEquals(0, neuron.compute(inputs00))
         assertEquals(0, neuron.compute(inputs01))

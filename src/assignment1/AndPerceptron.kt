@@ -1,5 +1,5 @@
 package assignment1
 
-class AndPerceptron(weights: List<Double>, bias: Double) : IPerceptron, AbstractPerceptron(weights, 0.001, bias, 0.1) {
+class AndPerceptron(weights: Array<Double>, bias: Double) : IPerceptron, AbstractPerceptron(weights, bias, 0.1) {
 
 }

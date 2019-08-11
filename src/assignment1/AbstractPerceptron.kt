@@ -2,7 +2,6 @@ package assignment1
 
 abstract class AbstractPerceptron(
     private val weights: Array<Double>,
-    val tolerance: Double,
     private var bias: Double,
     private val learningRate: Double
 ) {
