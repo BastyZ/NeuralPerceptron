@@ -42,7 +42,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
         }
 
         // We change the set of points to test
-        var successfulTries: Int = 0
+        var successfulTries = 0
         testingSample.forEach {
             when {
                 neuron.compute(it.first) == it.second -> successfulTries++
@@ -56,7 +56,6 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
 
     @Test
     fun trainNTimesForAll() {
-        val pesos = arrayOf(1.0, 5.0)
         val neuron = SpacePositionPerceptron(initialWeights,initialBias)
         repeat(trainingSessions) {
             trainingSample.forEach {
@@ -64,7 +63,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
             }
         }
         // We change the set of points to test
-        var successfulTries: Int = 0
+        var successfulTries = 0
         testingSample.forEach {
             when {
                 neuron.compute(it.first) == it.second -> successfulTries++
@@ -80,7 +79,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
         val neuron = SpacePositionPerceptron(initialWeights,initialBias)
 
         // We change the set of points to test
-        var successfulTries: Int = 0
+        var successfulTries = 0
         testingSample.forEach {
             when {
                 neuron.compute(it.first) == it.second -> successfulTries++
