@@ -35,7 +35,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
     }
 
     @Test
-    fun trainOnceForAll() {
+    fun trainOnce() {
         val neuron = SpacePositionPerceptron(initialWeights,initialBias)
         trainingSample.forEach {
             neuron.train(it.first, it.second)
@@ -49,13 +49,13 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
             }
         }
         val successRate: Double = successfulTries.toDouble() / testingPoints.toDouble()
-        print("One train for all: success rate: $successRate \n")
+        print("One train : success rate: $successRate \n")
         // We want it to be better than random
         assertTrue(successRate > 0.5)
     }
 
     @Test
-    fun trainNTimesForAll() {
+    fun trainNTimes() {
         val neuron = SpacePositionPerceptron(initialWeights,initialBias)
         repeat(trainingSessions) {
             trainingSample.forEach {
@@ -70,12 +70,12 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
             }
         }
         val successRate: Double = successfulTries.toDouble() / testingPoints.toDouble()
-        print("N Trainings for all: success rate: $successRate \n")
+        print("$trainingSessions Trainings: success rate: $successRate \n")
         assertTrue(successRate > 0.7)
     }
 
     @Test
-    fun noTrainForAll() {
+    fun noTrain() {
         val neuron = SpacePositionPerceptron(initialWeights,initialBias)
 
         // We change the set of points to test
@@ -86,7 +86,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
             }
         }
         val successRate: Double = successfulTries.toDouble() / testingPoints.toDouble()
-        print("no train for all: success rate: $successRate \n")
+        print("no train: success rate: $successRate \n")
         assertTrue(successRate < 0.6)
     }
 
