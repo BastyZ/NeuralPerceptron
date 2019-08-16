@@ -1,7 +1,6 @@
 package assignment1.sigmoidNeuron
 
-import kotlin.math.E
-import kotlin.math.pow
+import kotlin.math.exp
 
 abstract class AbstractSigmoidNeuron(
     private val weights: Array<Double>,
@@ -16,7 +15,7 @@ abstract class AbstractSigmoidNeuron(
         }
 
         // output: 1 / (1 + E**( - epsilon - bias) )
-        return 1 / ( 1 + E.pow( -(epsilon + bias) ) )
+        return 1 / ( 1 + exp( -(epsilon + bias) ) )
     }
 
     private fun learn(diff: Double, inputs: List<Double>) {
