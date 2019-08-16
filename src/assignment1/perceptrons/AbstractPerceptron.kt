@@ -1,4 +1,4 @@
-package assignment1
+package assignment1.perceptrons
 
 abstract class AbstractPerceptron(
     private val weights: Array<Double>,

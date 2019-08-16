@@ -1,5 +1,6 @@
 package assignment1
 
+import assignment1.perceptrons.OrPerceptron
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

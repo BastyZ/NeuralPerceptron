@@ -1,5 +1,6 @@
 package assignment1
 
+import assignment1.perceptrons.SpacePositionPerceptron
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
@@ -36,7 +37,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
 
     @Test
     fun trainOnce() {
-        val neuron = SpacePositionPerceptron(initialWeights,initialBias)
+        val neuron = SpacePositionPerceptron(initialWeights, initialBias)
         trainingSample.forEach {
             neuron.train(it.first, it.second)
         }
@@ -56,7 +57,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
 
     @Test
     fun trainNTimes() {
-        val neuron = SpacePositionPerceptron(initialWeights,initialBias)
+        val neuron = SpacePositionPerceptron(initialWeights, initialBias)
         repeat(trainingSessions) {
             trainingSample.forEach {
                 neuron.train(it.first, it.second)
@@ -76,7 +77,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
 
     @Test
     fun noTrain() {
-        val neuron = SpacePositionPerceptron(initialWeights,initialBias)
+        val neuron = SpacePositionPerceptron(initialWeights, initialBias)
 
         // We change the set of points to test
         var successfulTries = 0
