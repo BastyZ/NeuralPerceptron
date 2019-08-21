@@ -2,7 +2,7 @@ package assignment1.sigmoidNeuron
 
 import kotlin.math.exp
 
-abstract class AbstractSigmoidNeuron(
+class SigmoidNeuron(
     private val weights: Array<Double>,
     private var bias: Double,
     private val learningRate: Double
