@@ -25,6 +25,10 @@ class SigmoidNeuron(
         bias += learningRate * diff
     }
 
+    /** train :: List<Double>, Int ->
+     * Trains a Neuron by giving it a training example and
+     * making it learn from the output
+     */
     fun train(inputs: List<Double>, desiredOutput: Int) {
         val realOutput: Double = feed(inputs)
         learn(desiredOutput - realOutput, inputs)

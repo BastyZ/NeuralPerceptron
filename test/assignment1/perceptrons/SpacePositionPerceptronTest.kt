@@ -1,6 +1,5 @@
-package assignment1
+package assignment1.perceptrons
 
-import assignment1.perceptrons.SpacePositionNeuron
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.random.Random

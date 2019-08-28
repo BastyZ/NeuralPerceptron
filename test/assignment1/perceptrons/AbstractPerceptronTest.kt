@@ -1,4 +1,4 @@
-package assignment1
+package assignment1.perceptrons
 
 import org.junit.jupiter.api.BeforeEach
 
