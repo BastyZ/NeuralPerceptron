@@ -7,6 +7,9 @@ class Neuron(
     private val learningRate: Double = 0.01
     ): INeuron {
 
+    // Delta for error back-propagation
+    var delta: Double = 0.0
+
     override fun feed(inputs: List<Double>): Double {
         assert(weights.size == inputs.size) {
             "Weights and Inputs lengths does not match"
@@ -19,7 +22,21 @@ class Neuron(
         return activationFun.apply(acc + bias)
     }
 
-    override fun train(inputs: List<Double>, desiredOutput: Double) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    /**
+     * When back-propagating errors, sets the new delta
+     * according to the error and the actual output of this neuron
+      */
+    internal fun adjustDeltaWith(error: Double, output: Double) {
+        delta = error * activationFun.derivative(output)
+    }
+
+    override fun train(
+        inputs: List<Double>,
+        desiredOutput: Double
+    ) {
+        for ((i, anInput) in inputs.withIndex()) {
+            weights[i] += anInput * delta * learningRate
+        }
+        bias += learningRate * delta
     }
 }

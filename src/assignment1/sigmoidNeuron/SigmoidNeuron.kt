@@ -14,7 +14,7 @@ class SigmoidNeuron(
             epsilon += weights[i] * inputs[i]
         }
 
-        // output: 1 / (1 + E**( - epsilon - bias) )
+        // output: 1 / (1 + e**( - epsilon - bias) )
         return 1 / ( 1 + exp( -(epsilon + bias) ) )
     }
 

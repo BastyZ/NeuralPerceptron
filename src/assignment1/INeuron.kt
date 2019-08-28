@@ -8,9 +8,12 @@ interface INeuron {
     fun feed(inputs: List<Double>): Double
 
     /**
-     * Allows the neuron to learn, based on an input and the desired prediction for that
+     * Allows the neuron to learn, based on error and the desired prediction for that
      * particular input
      */
-    fun train(inputs: List<Double>, desiredOutput: Double)
+    fun train(
+        inputs: List<Double>,
+        desiredOutput: Double
+    )
 
 }
