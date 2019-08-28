@@ -46,7 +46,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
         var successfulTries = 0
         testingSample.forEach {
             when {
-                neuron.compute(it.first) == it.second -> successfulTries++
+                neuron.feed(it.first) == it.second -> successfulTries++
             }
         }
         val successRate: Double = successfulTries.toDouble() / testingPoints.toDouble()
@@ -67,7 +67,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
         var successfulTries = 0
         testingSample.forEach {
             when {
-                neuron.compute(it.first) == it.second -> successfulTries++
+                neuron.feed(it.first) == it.second -> successfulTries++
             }
         }
         val successRate: Double = successfulTries.toDouble() / testingPoints.toDouble()
@@ -83,7 +83,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
         var successfulTries = 0
         testingSample.forEach {
             when {
-                neuron.compute(it.first) == it.second -> successfulTries++
+                neuron.feed(it.first) == it.second -> successfulTries++
             }
         }
         val successRate: Double = successfulTries.toDouble() / testingPoints.toDouble()

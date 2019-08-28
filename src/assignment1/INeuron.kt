@@ -2,6 +2,8 @@ package assignment1
 
 interface INeuron {
 
-    fun compute(inputs: List<Double>): Double
+    fun feed(inputs: List<Double>): Double
+
+    fun train(inputs: List<Double>, desiredOutput: Double)
 
 }

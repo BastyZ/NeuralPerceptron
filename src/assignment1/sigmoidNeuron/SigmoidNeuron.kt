@@ -8,7 +8,7 @@ class SigmoidNeuron(
     private val learningRate: Double
     ) {
 
-    fun compute(inputs: List<Double>): Double {
+    fun feed(inputs: List<Double>): Double {
         var epsilon = 0.0
         for (i: Int in inputs.indices) {
             epsilon += weights[i] * inputs[i]
@@ -26,7 +26,7 @@ class SigmoidNeuron(
     }
 
     fun train(inputs: List<Double>, desiredOutput: Int) {
-        val realOutput: Double = compute(inputs)
+        val realOutput: Double = feed(inputs)
         learn(desiredOutput - realOutput, inputs)
     }
 }

@@ -1,10 +1,8 @@
 package assignment1.sigmoidNeuron
 
-import assignment1.AbstractPerceptronTest
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 
 internal class SigmoidNeuronTest {
@@ -27,13 +25,13 @@ internal class SigmoidNeuronTest {
     @Test
     fun computeWithOutTrain() {
         val neuron = SigmoidNeuron(arrayOf(2.0,2.0),1.0, tolerance)
-        assertTrue(neuron.compute(inputs00) > 0.0)
+        assertTrue(neuron.feed(inputs00) > 0.0)
     }
 
     @Test
     fun computeAnd() {
         val neuron = SigmoidNeuron(arrayOf(2.0, 2.0), .0, tolerance)
-        assertTrue(neuron.compute(inputs00) < .6)
+        assertTrue(neuron.feed(inputs00) < .6)
     }
 
     @Test
@@ -43,9 +41,9 @@ internal class SigmoidNeuronTest {
         for (j in 20 downTo -20 step 2) {
             val i = j.toDouble() / 10
             // testing that is the curve it's supposed to be
-            assertTrue(lastValue - neuron.compute(listOf(i)) <= 0.15 )
-            assertTrue(neuron.compute(listOf(i)) > .0)
-            lastValue = neuron.compute(listOf(i))
+            assertTrue(lastValue - neuron.feed(listOf(i)) <= 0.15 )
+            assertTrue(neuron.feed(listOf(i)) > .0)
+            lastValue = neuron.feed(listOf(i))
         }
     }
 }

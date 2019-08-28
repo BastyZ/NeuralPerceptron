@@ -6,14 +6,14 @@ abstract class AbstractPerceptron(
     private val learningRate: Double
 ) {
 
-    fun compute(inputs: List<Double>): Double {
+    fun feed(inputs: List<Double>): Double {
         var output = 0.0
         for (i: Int in inputs.indices) {
             output += weights[i] * inputs[i]
         }
         return when {
-            output > bias      -> 1.0
-            else               -> 0.0
+            output + bias > 0   -> 1.0
+            else                -> 0.0
         }
     }
 
@@ -25,7 +25,7 @@ abstract class AbstractPerceptron(
     }
 
     fun train(inputs: List<Double>, desiredOutput: Double) {
-        val realOutput: Double = compute(inputs)
+        val realOutput: Double = feed(inputs)
         learn(desiredOutput - realOutput, inputs)
     }
 
