@@ -8,7 +8,7 @@ class Neuron(
     ): INeuron {
 
     // Delta for error back-propagation
-    var delta: Double = 0.0
+    private var delta: Double = 0.0
 
     override fun feed(inputs: List<Double>): Double {
         assert(weights.size == inputs.size) {
