@@ -3,6 +3,14 @@ package assignment1
 import assignment1.activationFun.Sigmoid
 import kotlin.random.Random.Default.nextDouble
 
+/**
+ * Class representing a neuron, it has various constructors as syntactic sugar
+ *  Neuron(n: Int) creates a neuron with n random weights between [0,1) using Sigmoid's activation fun
+ *  Neuron(n: Int, fun: IActivationFun) does the above with custom activation fun
+ *  with the primary one you set manually all the parameters of the Neuron
+ *
+ *  @author Bastián Inostroza
+ */
 class Neuron(
     private var weights: MutableList<Double>,
     private val activationFun: IActivationFun,
@@ -12,11 +20,11 @@ class Neuron(
 
     // basic constructor that receives the number of weights and the activation function
     constructor(nOfWeights: Int,
-                activationFun: IActivationFun
+                function: IActivationFun
                 ): this(
-        MutableList(nOfWeights) { _ -> nextDouble()},
-        activationFun
-    )
+                        MutableList(nOfWeights) { _ -> nextDouble()},
+                        function
+                        )
 
     // fast constructor that only receives the number of weights
     constructor(nOfWeights: Int): this(nOfWeights, Sigmoid())
