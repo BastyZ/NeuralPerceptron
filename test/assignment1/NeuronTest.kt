@@ -104,7 +104,7 @@ internal class NeuronTest {
         }
 
         // we use another sample on the same line to test the result
-        var successfulTries: Int = 0
+        var successfulTries = 0
         testingSample.forEach {
             when {
                 abs(it.second - neuron.feed(it.first)) < .05 -> successfulTries++
