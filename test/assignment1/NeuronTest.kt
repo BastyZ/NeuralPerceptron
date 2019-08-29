@@ -12,7 +12,7 @@ import kotlin.random.Random
 internal class NeuronTest {
     private val testingPoints: Int = 10000
     private val trainingPoints: Int = 100
-    private val trainingSessions: Int = 50
+    private val trainingSessions: Int = 100
     private val width: Int = 20
     private val height: Int = 20
     private val initialWeights = mutableListOf<Double>(1.0, 1.0)
@@ -48,12 +48,12 @@ internal class NeuronTest {
     fun setUp() {
         // If nothing is made we start the test with a neuron
         // with bias 0.0 and weights 1.0 and Sigmoid activation fun
-        neuron = Neuron(initialWeights, initialBias, Sigmoid(), 0.1)
+        neuron = Neuron(initialWeights, Sigmoid(), initialBias, 0.1)
     }
 
     @Test
     fun andStep() {
-        neuron = Neuron(initialWeights, -1.1, Step())
+        neuron = Neuron(initialWeights, Step(), -1.1)
         assertEquals(0.0, neuron.feed(inputs00))
         assertEquals(0.0, neuron.feed(inputs01))
         assertEquals(0.0, neuron.feed(inputs10))
@@ -62,7 +62,7 @@ internal class NeuronTest {
 
     @Test
     fun nandStep() {
-        neuron = Neuron(mutableListOf(-1.0, -1.0), .9, Step())
+        neuron = Neuron(mutableListOf(-1.0, -1.0), Step(), .9)
         assertEquals(1.0, neuron.feed(inputs00))
         assertEquals(0.0, neuron.feed(inputs01))
         assertEquals(0.0, neuron.feed(inputs10))
@@ -71,7 +71,7 @@ internal class NeuronTest {
 
     @Test
     fun orStep() {
-        neuron = Neuron(initialWeights, -.1, Step())
+        neuron = Neuron(initialWeights, Step(), -.1)
         assertEquals(0.0, neuron.feed(inputs00))
         assertEquals(1.0, neuron.feed(inputs01))
         assertEquals(1.0, neuron.feed(inputs10))
@@ -139,5 +139,21 @@ internal class NeuronTest {
         print("$trainingSessions Trainings :: SuccessRate is $successRate \n")
         // We expect it to perform very well with various rounds of training
         assertTrue(successRate > 0.8)
+    }
+
+    @Test
+    fun secondaryConstructor() {
+        neuron = Neuron(2)
+        var successfulTries = 0
+        // predicts for all the training sample
+        testingSample.forEach {
+            when {
+                abs( it.second - neuron.feed(it.first) ) < .05 -> successfulTries++
+            }
+        }
+        val successRate: Double = successfulTries.toDouble() / testingPoints
+        println("No training on Random Neuron :: SuccessRate is $successRate")
+        // with no training we expect to perform almost like random
+        assertTrue(successRate < .6)
     }
 }

@@ -1,11 +1,25 @@
 package assignment1
 
+import assignment1.activationFun.Sigmoid
+import kotlin.random.Random.Default.nextDouble
+
 class Neuron(
     private var weights: MutableList<Double>,
-    private var bias: Double,
     private val activationFun: IActivationFun,
+    private var bias: Double = 1.0,
     private val learningRate: Double = 0.01
     ): INeuron {
+
+    // basic constructor that receives the number of weights and the activation function
+    constructor(nOfWeights: Int,
+                activationFun: IActivationFun
+                ): this(
+        MutableList(nOfWeights) { _ -> nextDouble()},
+        activationFun
+    )
+
+    // fast constructor that only receives the number of weights
+    constructor(nOfWeights: Int): this(nOfWeights, Sigmoid())
 
     // Delta for error back-propagation
     private var delta: Double = 0.0
