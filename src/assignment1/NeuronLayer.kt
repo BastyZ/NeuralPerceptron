@@ -4,7 +4,7 @@ import assignment1.activationFun.Sigmoid
 
 class NeuronLayer(private val nOfNeurons: Int , private var previousLayer: NeuronLayer?) {
     private lateinit var neurons: Array<Neuron>
-    private val outputs = MutableList(nOfNeurons) {.0}
+    internal val outputs = MutableList(nOfNeurons) {.0}
     internal var nextLayer: NeuronLayer? = null
 
     /**
