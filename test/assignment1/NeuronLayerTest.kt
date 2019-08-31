@@ -1,13 +1,9 @@
 package assignment1
 
 import assignment1.activationFun.Step
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath
-import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
-import kotlin.test.assert
+import org.junit.jupiter.api.Test
+import kotlin.test.assertTrue
 
 internal class NeuronLayerTest {
 
@@ -27,7 +23,7 @@ internal class NeuronLayerTest {
     fun feed() {
         val output = layer.feed(listOf(1.0,1.0))
         // We'll check that is exactly one result, and it's of the class we want it
-        assert(output.size == 1)
-        assert(output.first()::class == Double::class)
+        assertTrue(output.size == 1)
+        assertTrue(output.first()::class == Double::class)
     }
 }
