@@ -52,6 +52,13 @@ class Neuron(
         delta = error * activationFun.derivative(output)
     }
 
+    /**
+     * Gives the error associated to a specific weight, used by the NeuronLayer
+     */
+    internal fun errorForWeight(weightIndex: Int) : Double {
+        return weights[weightIndex] * delta
+    }
+
     override fun train(
         inputs: List<Double>,
         desiredOutput: Double
