@@ -1,7 +1,7 @@
 package assignment1.perceptrons
 
-import assignment1.INeuron
 
-class SpacePositionNeuron(weights: Array<Double>, bias: Double) : INeuron,
+
+class SpacePositionNeuron(weights: Array<Double>, bias: Double) : IOldNeuron,
     AbstractPerceptron(weights, bias, 0.1) {
 }

@@ -38,7 +38,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
     fun trainOnce() {
         val neuron = SpacePositionNeuron(initialWeights, initialBias)
         trainingSample.forEach {
-            neuron.train(it.first)
+            neuron.train(it.first, it.second)
         }
 
         // We change the set of points to test
@@ -59,7 +59,7 @@ internal class SpacePositionPerceptronTest : AbstractPerceptronTest() {
         val neuron = SpacePositionNeuron(initialWeights, initialBias)
         repeat(trainingSessions) {
             trainingSample.forEach {
-                neuron.train(it.first)
+                neuron.train(it.first, it.second)
             }
         }
         // We change the set of points to test
