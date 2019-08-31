@@ -82,14 +82,4 @@ class NeuronLayer(private val nOfNeurons: Int , private var previousLayer: Neuro
         nextLayer?.updateWeights(networkInputs)
     }
 
-    fun example(networkInputs: List<Double>) {
-        val inputs: List<Double> = when (previousLayer) {
-            null -> networkInputs
-            else -> previousLayer!!.outputs
-        }
-        // adjust each individual Neuron's weights
-        neurons.withIndex().forEach { (i, neuron) ->
-            outputs[i] = neuron.feed(networkInputs)
-        }
-    }
 }
