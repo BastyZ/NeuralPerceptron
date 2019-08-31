@@ -2,6 +2,7 @@ package assignment1
 
 import assignment1.activationFun.Sigmoid
 import java.util.Collections.shuffle
+import kotlin.math.abs
 
 /**
  * Class that represents an Neural Network, defined with i/o
@@ -9,13 +10,13 @@ import java.util.Collections.shuffle
 class NeuralNetwork(
                     private val nOfInputs: Int,
                     val nOfOutputs: Int,
-                    private val neuronsPerInternalLayer: List<Int>,
+                    neuronsPerInternalLayer: List<Int>,
                     private val activationFun: IActivationFun = Sigmoid()
                     ) {
 
     var successRate: MutableList<Double> = mutableListOf()
-    private lateinit var layers: MutableList<NeuronLayer>
-    private var trainSets = mutableListOf<TrainSet>()
+    private var layers: MutableList<NeuronLayer>
+    private var trainSets = mutableListOf<TrainSample>()
 
     init {
         val nOfInternalLayers = neuronsPerInternalLayer.size
@@ -57,10 +58,10 @@ class NeuralNetwork(
         layers.last().backPropagateError(desiredOutput)
     }
 
-    internal data class TrainSet(val inputs: List<Double>, val answers: List<Double>)
+    internal data class TrainSample(val inputs: List<Double>, val answers: List<Double>)
 
-    fun addTrainSet(inputs: List<Double>, answers: List<Double>){
-        trainSets.add(TrainSet(inputs, answers))
+    fun addTrainSample(inputs: List<Double>, answers: List<Double>){
+        trainSets.add(TrainSample(inputs, answers))
     }
 
     fun trainRounds(rounds: Int) {
@@ -72,9 +73,17 @@ class NeuralNetwork(
 
             trainSets.forEach { set ->
                 train(set.inputs, set.answers)
-                when { layers.last().outputs == set.answers -> correctGuesses++ }
+
+                var guessIsCorrect = true
+                layers.last().outputs.withIndex().forEach {
+                    when {
+                        abs(it.value - set.answers[it.index]) <= .05 -> null
+                        else -> guessIsCorrect = false
+                    }
+                    }
+                if (guessIsCorrect) correctGuesses++
             }
-            successRate.add(correctGuesses.toDouble() / trainSets.size * 100)
+            successRate.add((correctGuesses.toDouble() / trainSets.size) * 100)
         }
     }
 
