@@ -24,7 +24,7 @@ class NeuronLayer(private val nOfNeurons: Int , private var previousLayer: Neuro
      */
     internal fun feed(inputs: List<Double>): MutableList<Double> {
         assert(::neurons.isInitialized) { "Layer must be built first" }
-        for ((i, neuron) in neurons.withIndex()) {
+        neurons.withIndex().forEach {(i, neuron) ->
             outputs[i] = neuron.feed(inputs)
         }
         // feed the next layer or return the output of this layer
@@ -69,6 +69,7 @@ class NeuronLayer(private val nOfNeurons: Int , private var previousLayer: Neuro
     }
 
     internal fun updateWeights(networkInputs: List<Double>) {
+        // chooses the source for the inputs
         val inputs: List<Double> = when (previousLayer) {
             null -> networkInputs
             else -> previousLayer!!.outputs

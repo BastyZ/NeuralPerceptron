@@ -22,7 +22,7 @@ class Neuron(
     constructor(nOfWeights: Int,
                 function: IActivationFun
                 ): this(
-                        MutableList(nOfWeights) { nextDouble()},
+                        MutableList(nOfWeights) { nextDouble(-1.0, 1.0)},
                         function
                         )
 
