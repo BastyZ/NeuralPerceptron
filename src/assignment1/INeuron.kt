@@ -12,8 +12,7 @@ interface INeuron {
      * particular input
      */
     fun train(
-        inputs: List<Double>,
-        desiredOutput: Double
+        inputs: List<Double>
     )
 
 }

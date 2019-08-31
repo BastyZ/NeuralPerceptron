@@ -22,7 +22,7 @@ class Neuron(
     constructor(nOfWeights: Int,
                 function: IActivationFun
                 ): this(
-                        MutableList(nOfWeights) { _ -> nextDouble()},
+                        MutableList(nOfWeights) { nextDouble()},
                         function
                         )
 
@@ -59,11 +59,8 @@ class Neuron(
         return weights[weightIndex] * delta
     }
 
-    override fun train(
-        inputs: List<Double>,
-        desiredOutput: Double
-    ) {
-        for ((i, anInput) in inputs.withIndex()) {
+    override fun train(inputs: List<Double>) {
+        inputs.withIndex().forEach { (i, anInput) ->
             weights[i] += anInput * delta * learningRate
         }
         bias += learningRate * delta

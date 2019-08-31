@@ -100,7 +100,7 @@ internal class NeuronTest {
         trainingSample.forEach {
             val output = neuron.feed(it.first)
             neuron.adjustDeltaWith(it.second - output, output)
-            neuron.train(it.first, it.second)
+            neuron.train(it.first)
         }
 
         // we use another sample on the same line to test the result
@@ -124,7 +124,7 @@ internal class NeuronTest {
             trainingSample.forEach {
                 val output = neuron.feed(it.first)
                 neuron.adjustDeltaWith(it.second - output, output)
-                neuron.train(it.first, it.second)
+                neuron.train(it.first)
             }
         }
 
