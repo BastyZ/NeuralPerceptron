@@ -8,7 +8,7 @@ import java.util.Collections.shuffle
  */
 class NeuralNetwork(
                     private val nOfInputs: Int,
-                    private val nOfOutputs: Int,
+                    val nOfOutputs: Int,
                     private val neuronsPerInternalLayer: List<Int>,
                     private val activationFun: IActivationFun = Sigmoid()
                     ) {
@@ -23,34 +23,34 @@ class NeuralNetwork(
 
         // We define manually the first and last layer (0 and nOfLayers +1)
         // All the others are created normally
-        layers = MutableList(nOfInternalLayers + 2) {
-            when (it) {
-                0               -> NeuronLayer(nOfInputs, null)
-                layers.lastIndex-> NeuronLayer(nOfOutputs, layers[it])
-                else            -> NeuronLayer(neuronsPerInternalLayer[it+1], layers[it])
-            }
+        layers = MutableList(1) { NeuronLayer(nOfInputs, null) }
+        // Add internal layers
+        neuronsPerInternalLayer.withIndex().forEach { (i, nOfNeurons) ->
+            layers.add(NeuronLayer(nOfNeurons, layers[i]))
         }
+        // add external layer
+        layers.add(NeuronLayer(nOfOutputs, layers.last()))
 
         // Now we proceed to build each layer and assign next layers
         layers.withIndex().forEach { (i, layer) ->
             when (i) {
-                layers.lastIndex ->  layer.build(nOfOutputs, activationFun)
+                layers.lastIndex ->  layer.build(layers[i-1].outputs.size, activationFun)
                 0 -> {
                     // oh the first case
                     layer.build(nOfInputs, activationFun)
                     layer.nextLayer = layers[i+1]
                 }
                 else -> {
-                    layer.build(neuronsPerInternalLayer[i-1], activationFun)
+                    layer.build(layers[i-1].outputs.size, activationFun)
                     layer.nextLayer = layers[i+1]
                 }
             }
         }
     }
 
-    fun feed(inputs: List<Double>): MutableList<Double> {
+    fun feed(inputs: List<Double>): List<Double> {
         layers.first().feed(inputs)
-        return layers.last().outputs
+        return layers.last().outputs.toList()
     }
 
     private fun backPropagateError(desiredOutput: List<Double>) {
