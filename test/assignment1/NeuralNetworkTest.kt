@@ -65,19 +65,19 @@ internal class NeuralNetworkTest {
         NeuralNetwork.max = 20.0
         NeuralNetwork.min = -20.0
 
-        trainingSets.forEach { set -> network.addTrainSample(set.inputs, set.answers) }
+        network.setSamples(train = trainingSets.toMutableList(), test = testingSets.toMutableList())
         network.trainRounds(trainingSessions)
         var success = .0
         var ext = Pair(1.0,0.0)
 
-
+        // check correctness by hand
         testingSets.forEach { set ->
             val output = network.feed(set.inputs)
             ext = Pair(min(ext.first,output.first()), max(ext.second,output.first()))
             if (abs(set.answers.first() - output.first()) < 0.01) {success++}
         }
         println("error:: min ${ext.first}  max ${ext.second} \n" +
-                "success rate ${success/testingSets.size}")
+                "success rate ${success/testingSets.size} neuron successRate: ${network.successRate.last()}")
         assertTrue(success/testingSets.size > .9)
     }
 

@@ -13,10 +13,10 @@ class NeuralNetwork(
                     neuronsPerInternalLayer: List<Int>,
                     private val activationFun: IActivationFun = Sigmoid()
                     ) {
-
     var successRate: MutableList<Double> = mutableListOf()
     private var layers: MutableList<NeuronLayer>
     private var trainSets = mutableListOf<TrainSample>()
+    private var testSets = mutableListOf<TrainSample>()
 
     init {
         val nOfInternalLayers = neuronsPerInternalLayer.size
@@ -58,28 +58,60 @@ class NeuralNetwork(
         layers.last().backPropagateError(desiredOutput)
     }
 
-    internal data class TrainSample(val inputs: List<Double>, val answers: List<Double>)
+    data class TrainSample(val inputs: List<Double>, val answers: List<Double>)
 
     fun addTrainSample(inputs: List<Double>, answers: List<Double>){
         trainSets.add(TrainSample(inputs, answers))
+    }
+
+    fun addTestSample(inputs: List<Double>, answers: List<Double>){
+        testSets.add(TrainSample(inputs, answers))
+    }
+
+    fun setSamples(train: MutableList<TrainSample>, test: MutableList<TrainSample>) {
+        trainSets = train
+        testSets = test
     }
 
     fun trainRounds(rounds: Int) {
         // Recess the success rate metric
         successRate = mutableListOf()
         repeat(rounds) {
-            var correctGuesses = 0
             shuffle(trainSets)
 
             trainSets.forEach { set ->
                 train(set.inputs, set.answers)
+            }
 
-                layers.last().outputs.withIndex().forEach {
-                    if (abs(it.value - set.answers[it.index]) <= .05) correctGuesses++
+            var correctGuesses = 0
+            testSets.forEach {set ->
+                val output = feed(set.inputs)
+                if (isCorrect(output, set.answers)) correctGuesses++
+            }
+            successRate.add(correctGuesses.toDouble()/testSets.size)
+            println(successRate.last())
+        }
+    }
+
+    private fun isCorrect(output: List<Double>, ans: List<Double>): Boolean {
+        val correctIndex = ans.indexOf(ans.max())
+        val correctCheck: Boolean = abs(output[correctIndex] - ans[correctIndex])  <= .05
+
+        var othersCheck = true
+        loop@ for (i in ans.indices) {
+            if (i == correctIndex) continue
+            else {
+                when {
+                    abs(output[i] - ans[i])  >= .2 -> continue@loop
+                    else -> {
+                        othersCheck = false
+                        break@loop
+                    }
                 }
             }
-            successRate.add(correctGuesses.toDouble())
         }
+
+        return correctCheck && othersCheck
     }
 
     internal fun train(inputs: List<Double>, desiredOutput: List<Double>) {
