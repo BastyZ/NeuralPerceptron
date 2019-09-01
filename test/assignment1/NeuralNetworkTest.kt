@@ -1,9 +1,7 @@
 package assignment1
 
-import assignment1.NeuralNetwork.InputHandler.normalize
+import assignment1.NeuralNetwork.Utils.normalize
 import assignment1.activationFun.Sigmoid
-import assignment1.activationFun.Step
-import assignment1.activationFun.Tanh
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.math.abs
@@ -76,8 +74,6 @@ internal class NeuralNetworkTest {
             val output = network.feed(set.inputs)
             ext = Pair(min(ext.first,output.first()), max(ext.second,output.first()))
             if (abs(set.answers.first() - output.first()) < 0.01) {success++}
-            else {
-                println("isCorrect? :\t false \t\t ${output.first()} \t ${normalize(set.inputs)} \t | ${set.answers}")}
         }
         println("error:: min ${ext.first}  max ${ext.second} \n" +
                 "success rate ${success/testingSets.size}")

@@ -88,7 +88,7 @@ class NeuralNetwork(
         layers.first().updateWeights(inputs)
     }
 
-    companion object InputHandler {
+    companion object Utils {
         var min = 0.0
         var max = 0.0
         // Seed to be used by the Neuron to create the weights
