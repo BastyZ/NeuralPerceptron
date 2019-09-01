@@ -1,4 +1,4 @@
-package assignment1
+package assignment1.NeuralNetwork
 
 import assignment1.activationFun.Sigmoid
 import kotlin.random.Random.Default.nextDouble
@@ -22,7 +22,7 @@ class Neuron(
     constructor(nOfWeights: Int,
                 function: IActivationFun
                 ): this(
-                        MutableList(nOfWeights) { nextDouble(-1.0, 1.0)},
+                        MutableList(nOfWeights) { nextDouble(-2.0, 2.0)},
                         function
                         )
 

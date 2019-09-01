@@ -1,6 +1,6 @@
 package assignment1.activationFun
 
-import assignment1.IActivationFun
+import assignment1.NeuralNetwork.IActivationFun
 
 class Step: IActivationFun {
     override fun apply(x: Double): Double {

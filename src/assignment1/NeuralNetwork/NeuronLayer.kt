@@ -1,4 +1,4 @@
-package assignment1
+package assignment1.NeuralNetwork
 
 import assignment1.activationFun.Sigmoid
 

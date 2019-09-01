@@ -1,6 +1,6 @@
 package assignment1.activationFun
 
-import assignment1.IActivationFun
+import assignment1.NeuralNetwork.IActivationFun
 import kotlin.math.exp
 import kotlin.math.pow
 

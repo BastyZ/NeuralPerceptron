@@ -1,5 +1,6 @@
 package assignment1
 
+import assignment1.NeuralNetwork.Neuron
 import assignment1.activationFun.Sigmoid
 import assignment1.activationFun.Step
 import org.junit.jupiter.api.BeforeEach

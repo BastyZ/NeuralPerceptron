@@ -1,6 +1,7 @@
 package assignment1
 
-import assignment1.NeuralNetwork.Utils.normalize
+import assignment1.NeuralNetwork.NeuralNetwork
+import assignment1.NeuralNetwork.NeuralNetwork.Utils.normalize
 import assignment1.activationFun.Sigmoid
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -45,7 +46,7 @@ internal class NeuralNetworkTest {
     @BeforeEach
     fun setUp() {
         val layers: List<Int> = listOf(8,8,8)
-        network = NeuralNetwork(2,1, layers, Sigmoid())
+        network = NeuralNetwork(2, 1, layers, Sigmoid())
     }
 
     @Test

@@ -1,5 +1,6 @@
 package assignment1
 
+import assignment1.NeuralNetwork.NeuronLayer
 import assignment1.activationFun.Step
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
