@@ -14,8 +14,8 @@ import kotlin.random.Random.Default.nextDouble
 class Neuron(
     private var weights: MutableList<Double>,
     private val activationFun: IActivationFun,
-    private var bias: Double = 1.0,
-    private val learningRate: Double = 0.01
+    private var bias: Double = 0.0,
+    private val learningRate: Double = .01
     ): INeuron {
 
     // basic constructor that receives the number of weights and the activation function
@@ -23,7 +23,8 @@ class Neuron(
                 function: IActivationFun
                 ): this(
                         MutableList(nOfWeights) { nextDouble(-1.0, 1.0)},
-                        function
+                        function,
+                        nextDouble(-1.0, 1.0)
                         )
 
     // fast constructor that only receives the number of weights

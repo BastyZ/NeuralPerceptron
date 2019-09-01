@@ -74,22 +74,17 @@ class NeuralNetwork(
             trainSets.forEach { set ->
                 train(set.inputs, set.answers)
 
-                var guessIsCorrect = true
                 layers.last().outputs.withIndex().forEach {
-                    when {
-                        abs(it.value - set.answers[it.index]) <= .05 -> null
-                        else -> guessIsCorrect = false
-                    }
-                    }
-                if (guessIsCorrect) correctGuesses++
+                    if (abs(it.value - set.answers[it.index]) <= .05) correctGuesses++
+                }
             }
-            successRate.add((correctGuesses.toDouble() / trainSets.size) * 100)
+            successRate.add(correctGuesses.toDouble())
         }
     }
 
     internal fun train(inputs: List<Double>, desiredOutput: List<Double>) {
         feed(inputs)
         backPropagateError(desiredOutput)
-        layers.last().updateWeights(inputs)
+        layers.first().updateWeights(inputs)
     }
 }

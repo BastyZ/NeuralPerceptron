@@ -2,15 +2,18 @@ package assignment1
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 internal class NeuralNetworkTest {
 
-    private val testingPoints: Int = 10000000
-    private val trainingPoints: Int = 100
-    private val trainingSessions: Int = 100
+    private val testingPoints: Int = 100000
+    private val trainingPoints: Int = 500
+    private val trainingSessions: Int = 10000
     private val width: Int = 20
     private val height: Int = 20
     private val trainOnes = NeuralNetwork.TrainSample(listOf(1.0,1.0), listOf(1.0))
@@ -21,9 +24,9 @@ internal class NeuralNetworkTest {
     lateinit var network: NeuralNetwork
 
     private fun overLine(x: Double, y: Double): Double {
-        // Line y = -x - 4
+        // Line y = -x
         return when {
-            -x - 4.0 > y  -> 1.0
+            -x > y  -> 1.0
             else        -> 0.0
         }
     }
@@ -39,7 +42,7 @@ internal class NeuralNetworkTest {
 
     @BeforeEach
     fun setUp() {
-        val layers: List<Int> = listOf(3,5,3)
+        val layers: List<Int> = listOf(8,8)
         network = NeuralNetwork(2,1, layers)
     }
 
@@ -53,8 +56,17 @@ internal class NeuralNetworkTest {
 
     @Test
     fun trainRounds() {
-        testingSets.forEach { set -> network.addTrainSample(set.inputs, set.answers) }
+        trainingSets.forEach { set -> network.addTrainSample(set.inputs, set.answers) }
         network.trainRounds(trainingSessions)
-        print(network.successRate)
+        var success = .0
+        var ext = Pair(1.0,0.0)
+        testingSets.forEach { set ->
+            val output = network.feed(set.inputs)
+            ext = Pair(min(ext.first,output.first()), max(ext.second,output.first()))
+            if (abs(set.answers.first() - output.first()) < 0.05) success++
+        }
+        println("error:: min ${ext.first}  max ${ext.second} \n" +
+                "success rate ${success/testingSets.size}")
+        assertTrue(success/testingSets.size > .5)
     }
 }
