@@ -89,29 +89,29 @@ class NeuralNetwork(
                 if (isCorrect(output, set.answers)) correctGuesses++
             }
             successRate.add(correctGuesses.toDouble()/testSets.size)
-            println(successRate.last())
         }
     }
 
     private fun isCorrect(output: List<Double>, ans: List<Double>): Boolean {
         val correctIndex = ans.indexOf(ans.max())
+//        println("Error :: ${abs(output[correctIndex] - ans[correctIndex])} \t out: $output \t ans: $ans")
         val correctCheck: Boolean = abs(output[correctIndex] - ans[correctIndex])  <= .05
 
-        var othersCheck = true
-        loop@ for (i in ans.indices) {
-            if (i == correctIndex) continue
-            else {
-                when {
-                    abs(output[i] - ans[i])  >= .2 -> continue@loop
-                    else -> {
-                        othersCheck = false
-                        break@loop
-                    }
-                }
-            }
-        }
+//        var othersCheck = true
+//        loop@ for (i in ans.indices) {
+//            if (i == correctIndex) continue
+//            else {
+//                when {
+//                    abs(output[i] - ans[i])  >= .01 -> continue@loop
+//                    else -> {
+//                        othersCheck = false
+//                        break@loop
+//                    }
+//                }
+//            }
+//        }
 
-        return correctCheck && othersCheck
+        return correctCheck
     }
 
     internal fun train(inputs: List<Double>, desiredOutput: List<Double>) {

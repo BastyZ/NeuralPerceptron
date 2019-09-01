@@ -96,6 +96,6 @@ class Homework(private val trainingRounds: Int = 10000,
 }
 
 fun main() {
-    val work = Homework(10000, .4,"iris.data")
+    val work = Homework(10000, .5,"iris.data")
     work.draw()
 }

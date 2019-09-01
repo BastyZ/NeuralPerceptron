@@ -15,7 +15,7 @@ class Neuron(
     private var weights: MutableList<Double>,
     private val activationFun: IActivationFun,
     private var bias: Double = .0,
-    private val learningRate: Double = 0.1
+    private val learningRate: Double = 0.01
     ): INeuron {
 
     // basic constructor that receives  the number of weights and the activation function
