@@ -1,6 +1,9 @@
 package assignment1
 
 import assignment1.NeuralNetwork.InputHandler.normalize
+import assignment1.activationFun.Sigmoid
+import assignment1.activationFun.Step
+import assignment1.activationFun.Tanh
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.math.abs
@@ -13,7 +16,7 @@ import kotlin.test.assertTrue
 internal class NeuralNetworkTest {
 
     private val testingPoints: Int = 100000
-    private val trainingPoints: Int = 500
+    private val trainingPoints: Int = 1000
     private val trainingSessions: Int = 10000
     private val width: Int = 20
     private val height: Int = 20
@@ -43,8 +46,8 @@ internal class NeuralNetworkTest {
 
     @BeforeEach
     fun setUp() {
-        val layers: List<Int> = listOf(8,8)
-        network = NeuralNetwork(2,1, layers)
+        val layers: List<Int> = listOf(8,8,8)
+        network = NeuralNetwork(2,1, layers, Sigmoid())
     }
 
     @Test
@@ -57,14 +60,24 @@ internal class NeuralNetworkTest {
 
     @Test
     fun trainRounds() {
+        // This test could fail due to randomness
+
+        // On this case we already know the min and max, so we set them
+        NeuralNetwork.max = 20.0
+        NeuralNetwork.min = -20.0
+
         trainingSets.forEach { set -> network.addTrainSample(set.inputs, set.answers) }
         network.trainRounds(trainingSessions)
         var success = .0
         var ext = Pair(1.0,0.0)
+
+
         testingSets.forEach { set ->
             val output = network.feed(set.inputs)
             ext = Pair(min(ext.first,output.first()), max(ext.second,output.first()))
-            if (abs(set.answers.first() - output.first()) < 0.05) success++
+            if (abs(set.answers.first() - output.first()) < 0.01) {success++}
+            else {
+                println("isCorrect? :\t false \t\t ${output.first()} \t ${normalize(set.inputs)} \t | ${set.answers}")}
         }
         println("error:: min ${ext.first}  max ${ext.second} \n" +
                 "success rate ${success/testingSets.size}")

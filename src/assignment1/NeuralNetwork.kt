@@ -91,6 +91,16 @@ class NeuralNetwork(
     companion object InputHandler {
         var min = 0.0
         var max = 0.0
+        // Seed to be used by the Neuron to create the weights
+        const val seed: Int = 42
+
+        fun normalize(list: List<Double>): List<Double> {
+            val aList = mutableListOf<Double>()
+            list.forEach { value ->
+                aList.add(normalize(value))
+            }
+            return aList.toList()
+        }
 
         fun normalize(x: Double): Double {
             return (x - min) / (max - min)

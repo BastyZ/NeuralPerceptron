@@ -11,8 +11,8 @@ import kotlin.random.Random
 
 internal class NeuronTest {
     private val testingPoints: Int = 10000
-    private val trainingPoints: Int = 100
-    private val trainingSessions: Int = 100
+    private val trainingPoints: Int = 10000
+    private val trainingSessions: Int = 1000
     private val width: Int = 20
     private val height: Int = 20
     private val initialWeights = mutableListOf<Double>(1.0, 1.0)
