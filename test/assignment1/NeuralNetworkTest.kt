@@ -1,5 +1,6 @@
 package assignment1
 
+import assignment1.NeuralNetwork.InputHandler.normalize
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.math.abs
@@ -67,6 +68,18 @@ internal class NeuralNetworkTest {
         }
         println("error:: min ${ext.first}  max ${ext.second} \n" +
                 "success rate ${success/testingSets.size}")
-        assertTrue(success/testingSets.size > .5)
+        assertTrue(success/testingSets.size > .9)
+    }
+
+    @Test
+    fun companionTest() {
+        val aList = listOf<Double>(-20.0,5.0,6.0,-2.5)
+        NeuralNetwork.extractMaxAndMin(aList)
+        assertEquals(NeuralNetwork.max, 6.0)
+        assertEquals(NeuralNetwork.min, -20.0)
+
+        assertEquals(normalize(aList[1]), 25.0/26.0)
+        assertEquals(normalize(aList[2]), 1.0)
+        assertEquals(normalize(aList.last()), 17.5/26.0)
     }
 }

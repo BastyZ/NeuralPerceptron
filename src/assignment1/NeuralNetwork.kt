@@ -87,4 +87,18 @@ class NeuralNetwork(
         backPropagateError(desiredOutput)
         layers.first().updateWeights(inputs)
     }
+
+    companion object InputHandler {
+        var min = 0.0
+        var max = 0.0
+
+        fun normalize(x: Double): Double {
+            return (x - min) / (max - min)
+        }
+
+        fun extractMaxAndMin(list: List<Double>) {
+            min = list.min()!!
+            max = list.max()!!
+        }
+    }
 }

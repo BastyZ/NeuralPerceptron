@@ -18,7 +18,7 @@ class Neuron(
     private val learningRate: Double = .01
     ): INeuron {
 
-    // basic constructor that receives the number of weights and the activation function
+    // basic constructor that receives  the number of weights and the activation function
     constructor(nOfWeights: Int,
                 function: IActivationFun
                 ): this(
