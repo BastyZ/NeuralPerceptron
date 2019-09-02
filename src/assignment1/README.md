@@ -14,7 +14,14 @@ Para esto debe ir a la carpeta Assignment1, y correr la función
 `main()` en `Homework.kt` si usa intlliJ, dado que Kotlin viene incluido,
 para instrucciones en otros IDE o para linea de comandos revisar https://kotlinlang.org
 
-# Sobre la tarea (Análisis)
+# Sobre la tarea
+
+## Advertencia
+Acabo de notar que el label del eje y tiene un %, es un valor absoluto donde 1 es 100%
+no es un porcentaje
+
+## Análisis
+
 Lamentablemente a la red le cuesta bastante aprender con valores
 entre 0 y 1, e incluso si consideramos numeros más grandes (para hacer
 más sensible a la red) tanto en pesos como en la normalización 
