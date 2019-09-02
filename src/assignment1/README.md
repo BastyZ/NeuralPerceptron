@@ -23,19 +23,26 @@ podido descubrir la causa del error, ya que a mi parecer la propagación de
 errores y actualizacion de pesos está bien implementada (como algoritmo)
 con cambios discretos y pequeños cada vez que se comete un error.
 
-En resultados.jpg podemos apreciar como el error varía, considerando una
+![esta imagen](resultados.jpg) 
+En la imagen anterior podemos apreciar como el error varía, considerando una
 tasa de aprendizaje de 0.1, en resultado2.png vemos una tasa de aprendizaje
 de 0.001. Curiosamente en este es evidente que el error aumenta, por lo
 cual no se descarta que la implementación de tanto la propagación de errores
 como de la actualización de pesos estén malas.
+
+![resultado2.png](resultado2.png)
 
 (Para las dos imagenes anteriores de usaron 6 capas internas, 3 de 3 neuronas y 3 de 4 neuronas)
 
 Si se usan 6 capas de 10 neuronas se nota una curva bastante interesante en el error, que se puede
 apreciar en resultado3.png.
 
+![resultado3.png](resultado3.png)
+
 Se realiza un análisis donde se nota que no se calculó el error cuadrático, al arreglarlo se produce
 el efecto mostrado en resultado4.png, lo cual significa una mejora significativa al disminuir el error
-y amentar los aciertos, no a un punto deseable pero a algo bastante mejor
+y amentar los aciertos, no a un punto deseable pero a algo bastante mejor.
+
+![resultado4.png](resultado4.png)
 
 
