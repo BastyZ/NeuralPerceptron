@@ -34,7 +34,7 @@ class Homework(private val trainingRounds: Int = 10000,
                private val trainSubset: Double,
                filename: String
                 ) {
-    private val network = NeuralNetwork(4,3, listOf(8,8,8))
+    private val network = NeuralNetwork(4,3, listOf(10,10,10,10,10,10))
     private val plot = LinePlot("successRate", "Training Rounds", "Success (%)")
     private var samples = mutableListOf<NeuralNetwork.TrainSample>()
 
@@ -49,16 +49,26 @@ class Homework(private val trainingRounds: Int = 10000,
             // shuffle the lines to add randomness to the training set
             lines.shuffle()
 
+            // set maximums and minimums to normalize after
+            lines.forEach { line ->
+                if (line != "") {
+                    val lineArray = line.split(",")
+                    line.slice(0 until (lineArray.size -1)).withIndex().forEach {
+                        NeuralNetwork.setMinMax(it.value.toDouble(), it.index)
+                    }
+                }
+            }
+
             // Extract values to objects
             lines.forEach { line ->
                 val lineArray = line.split(",")
                 if (line != "") {
                     val ans = hotEncode(lineArray.last())
 
-                    // Add all the elements as Double
+                    // Add all the elements (normalized) as Double
                     val inputs = mutableListOf<Double>()
-                    line.slice(0 until (lineArray.size -1)).forEach {
-                        inputs.add( it.toDouble() )
+                    line.slice(0 until (lineArray.size -1)).withIndex().forEach {
+                        inputs.add( NeuralNetwork.normalize(it.value.toDouble(), it.index) * 4 )
                     }
 
                     // add to the samples
@@ -84,18 +94,19 @@ class Homework(private val trainingRounds: Int = 10000,
             println(error.message)
         } finally {
             reader?.close()
-            println("Exiting")
-            exitProcess(-1)
+            this.draw()
         }
     }
 
     fun draw() {
         plot.yData = network.successRate.toDoubleArray()
+        plot.y2Data = network.errorRate.toDoubleArray()
         plot.draw()
     }
 }
 
 fun main() {
-    val work = Homework(10000, .5,"iris.data")
-    work.draw()
+    // trainsubset es la cantidad de set que será usado para entrenar
+    // usar valor entre 0 y 1
+    val work = Homework(10000, .3,"iris.data")
 }

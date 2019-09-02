@@ -3,6 +3,8 @@ package assignment1.NeuralNetwork
 import assignment1.activationFun.Sigmoid
 import java.util.Collections.shuffle
 import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Class that represents an Neural Network, defined with i/o
@@ -14,6 +16,8 @@ class NeuralNetwork(
                     private val activationFun: IActivationFun = Sigmoid()
                     ) {
     var successRate: MutableList<Double> = mutableListOf()
+    var errorRate: MutableList<Double> = mutableListOf()
+
     private var layers: MutableList<NeuronLayer>
     private var trainSets = mutableListOf<TrainSample>()
     private var testSets = mutableListOf<TrainSample>()
@@ -84,10 +88,16 @@ class NeuralNetwork(
             }
 
             var correctGuesses = 0
+            var setError = 0.0
             testSets.forEach {set ->
                 val output = feed(set.inputs)
+                val i = set.answers.indexOf(set.answers.max())
+                val error = abs(output[i] - set.answers[i])
+                setError += error
+
                 if (isCorrect(output, set.answers)) correctGuesses++
             }
+            errorRate.add(setError/testSets.size)
             successRate.add(correctGuesses.toDouble()/testSets.size)
         }
     }
@@ -95,23 +105,9 @@ class NeuralNetwork(
     private fun isCorrect(output: List<Double>, ans: List<Double>): Boolean {
         val correctIndex = ans.indexOf(ans.max())
 //        println("Error :: ${abs(output[correctIndex] - ans[correctIndex])} \t out: $output \t ans: $ans")
-        val correctCheck: Boolean = abs(output[correctIndex] - ans[correctIndex])  <= .05
+        val error =  abs(output[correctIndex] - ans[correctIndex])
 
-//        var othersCheck = true
-//        loop@ for (i in ans.indices) {
-//            if (i == correctIndex) continue
-//            else {
-//                when {
-//                    abs(output[i] - ans[i])  >= .01 -> continue@loop
-//                    else -> {
-//                        othersCheck = false
-//                        break@loop
-//                    }
-//                }
-//            }
-//        }
-
-        return correctCheck
+        return output.indexOf(output.max()) == correctIndex
     }
 
     internal fun train(inputs: List<Double>, desiredOutput: List<Double>) {
@@ -121,18 +117,9 @@ class NeuralNetwork(
     }
 
     companion object Utils {
+        // for testing
         var min = 0.0
         var max = 0.0
-        // Seed to be used by the Neuron to create the weights
-        const val seed: Int = 42
-
-        fun normalize(list: List<Double>): List<Double> {
-            val aList = mutableListOf<Double>()
-            list.forEach { value ->
-                aList.add(normalize(value))
-            }
-            return aList.toList()
-        }
 
         fun normalize(x: Double): Double {
             return (x - min) / (max - min)
@@ -142,5 +129,19 @@ class NeuralNetwork(
             min = list.min()!!
             max = list.max()!!
         }
+
+        //for homework (hardcoded i know)
+        var minimums: MutableList<Double> = MutableList(4) {0.0}
+        var maximums: MutableList<Double> = MutableList(4) {0.0}
+
+        fun setMinMax(value: Double, index: Int) {
+            minimums[index] = min(minimums[index], value)
+            maximums[index] = max(minimums[index], value)
+        }
+
+        fun normalize(value: Double, index: Int): Double {
+            return (value - minimums[index]) / (maximums[index] - minimums[index])
+        }
+
     }
 }

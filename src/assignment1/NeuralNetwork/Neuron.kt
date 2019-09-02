@@ -15,14 +15,14 @@ class Neuron(
     private var weights: MutableList<Double>,
     private val activationFun: IActivationFun,
     private var bias: Double = .0,
-    private val learningRate: Double = 0.01
+    private val learningRate: Double = 0.001
     ): INeuron {
 
     // basic constructor that receives  the number of weights and the activation function
     constructor(nOfWeights: Int,
                 function: IActivationFun
                 ): this(
-                        MutableList(nOfWeights) { nextDouble(-2.0, 2.0)},
+                        MutableList(nOfWeights) { nextDouble(-4.0, 4.0)},
                         function
                         )
 
