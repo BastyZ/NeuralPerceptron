@@ -1,6 +1,7 @@
 package assignment1.NeuralNetwork
 
 import assignment1.activationFun.Sigmoid
+import kotlin.math.pow
 
 class NeuronLayer(private val nOfNeurons: Int , private var previousLayer: NeuronLayer?) {
     private lateinit var neurons: Array<Neuron>
@@ -44,7 +45,7 @@ class NeuronLayer(private val nOfNeurons: Int , private var previousLayer: Neuro
         assert(::neurons.isInitialized) { "Layer must be built first" }
         // calculates the error for each individual neuron
         for ((i, neuron) in neurons.withIndex()) {
-            val error = desiredOutput[i] - outputs[i]
+            val error = (desiredOutput[i] - outputs[i]).pow(2)
             neuron.adjustDeltaWith(error, outputs[i])
         }
         // if there is a previous layer, we keep propagating the error

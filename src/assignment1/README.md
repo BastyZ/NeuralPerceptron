@@ -32,6 +32,10 @@ como de la actualización de pesos estén malas.
 (Para las dos imagenes anteriores de usaron 6 capas internas, 3 de 3 neuronas y 3 de 4 neuronas)
 
 Si se usan 6 capas de 10 neuronas se nota una curva bastante interesante en el error, que se puede
-apreciar en resultado3.png
+apreciar en resultado3.png.
+
+Se realiza un análisis donde se nota que no se calculó el error cuadrático, al arreglarlo se produce
+el efecto mostrado en resultado4.png, lo cual significa una mejora significativa al disminuir el error
+y amentar los aciertos, no a un punto deseable pero a algo bastante mejor
 
 
