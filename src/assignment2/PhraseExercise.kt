@@ -6,41 +6,38 @@ fun main() {
     /**
      * Ejecuta el ejercicio de encontrar una palabra o frase
      */
-    val phrase: String = "Hello World! Welcome to Kotlin!"
+    val phrase: String = "Welcome to Kotlin!"
 
     val factory = BeingFactory(
-        factories = *arrayOf(CharChromosomeFactory(phrase.length, phrase)),
-        mutationRate = .4,
+        factories = *arrayOf(CharChromosomeFactory(
+            phrase.length,
+            phrase
+            )),
+        mutationRate = .2,
         fitnessFunction = ::fitness,
         filterFunction = ::filter
     )
 
-    val population = Population(1000, factory)
+    val population = Population(10000, factory)
     var fittest = population.getFittest()
 
-    var stability = 0
-    while (stability <= 100) {
+    var bestFit = doubleArrayOf(0.0)
+    var generation = 0
+    while (bestFit[0] < phrase.length) {
         population.evolve()
-        println(" :: Best Guess is ${population.getFittest().toString()}")
-        when (fittest) {
-            population.getFittest() -> stability++
-            else -> {
-                stability = 0
-                fittest = population.getFittest()
-            }
-        }
+        bestFit = population.getFittest().fitness
+        println(" :: Gen: $generation | Fit ${bestFit[0]} | Best Guess is ${population.getFittest().toString()}")
+        generation++
     }
 
-    println("The best guess is: $fittest \n with fitness ${fittest.fitness[0]}")
+    println("The best guess is: ${population.getFittest().toString()} \n with fitness ${bestFit[0]}")
 }
 
 fun fitness(being: Being): DoubleArray {
     var guessQuality = 0.0
     val chromosome = being.genotype[0]
     for ( gene in chromosome.genes.withIndex()) {
-        when (gene.value) {
-            chromosome.target[gene.index] -> guessQuality++
-        }
+        if (gene.value == chromosome.target[gene.index]) guessQuality++
     }
     return doubleArrayOf(guessQuality)
 }
