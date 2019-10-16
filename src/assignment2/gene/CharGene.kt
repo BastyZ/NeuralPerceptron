@@ -34,8 +34,9 @@ class CharGene: IGene<Char> {
     constructor(char: Char, anAlphabet: String) {
         alphabet = anAlphabet
         dna = char
-        isValid = alphabet.asSequence().contains(char)
+        isValid = alphabet.asSequence().contains(dna)
     }
+
     /**
      * Returns a copy of this gene.
      */
@@ -60,7 +61,9 @@ class CharGene: IGene<Char> {
      *    `true` if the two genes are equal, `false` if not.
      */
     override fun equals(other: Any?): Boolean {
-        return other is CharGene && this.dna == other.dna && this.alphabet == other.alphabet
+        return other is CharGene
+                && this.dna == other.dna
+                && this.alphabet == other.alphabet
     }
 
     /**
