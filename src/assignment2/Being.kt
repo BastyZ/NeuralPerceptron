@@ -3,7 +3,7 @@ package assignment2
 import assignment2.chromosome.IChromosome
 
 /**
- * Being of a population, it is made of a set of chromosomes.
+ * Being of a population (an individual), it is made of a set of chromosomes.
  *
  * @constructor
  *    Creates an being from a set of particular chromosomes.
@@ -31,7 +31,7 @@ class Being(
     }
 
     /**
-     * Default filter of the individual. Does nothing.
+     * Default filter of the being. Does nothing.
      */
     @Suppress("UNUSED_PARAMETER")
     private fun defaultFilter(being: Being) {
@@ -102,13 +102,12 @@ class Being(
     }
 
     override fun compareTo(other: Being): Int {
-        for (i in fitness.indices) {
-            return if (fitness[i] == other.fitness[i])
-                continue
-            else if (fitness[i] > other.fitness[i])
-                1
-            else
-                -1
+        loop@ for (i in fitness.indices) {
+            return when {
+                fitness[i] == other.fitness[i] -> continue@loop
+                fitness[i] > other.fitness[i] -> 1
+                else -> -1
+            }
         }
         return 0
     }
@@ -123,7 +122,7 @@ class Being(
     }
 
     /**
-     * Returns true if this individual is equal to another.
+     * Returns true if this being is equal to another.
      */
     override fun equals(other: Any?): Boolean {
         if (other !is Being) return false
