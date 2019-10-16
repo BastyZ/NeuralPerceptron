@@ -15,7 +15,8 @@ import assignment2.gene.CharGene
 class CharChromosomeFactory(
     private var size: Int,
     private var aTarget: String = "",
-    private var anAlphabet: String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+    private var anAlphabet: String =
+        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !\"%\$&/()=?`{[]}\\+~*#';.:,-_<>|@^'"
 ) : IChromosomeFactory<CharGene> {
 
     /** Builds a new `CharChromosome`. */
