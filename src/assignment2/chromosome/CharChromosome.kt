@@ -5,7 +5,6 @@ import kotlin.random.Random.Default.nextDouble
 
 /**
  * Chromosome that represents a sequence of characters.
- *
  */
 class CharChromosome : IChromosome<CharGene> {
     private val alphabet: String
@@ -18,17 +17,17 @@ class CharChromosome : IChromosome<CharGene> {
      * @param size
      *    Number of genes in the chromosome.
      * @param aTarget
-     *    **(Optional)** Target string of the chromosome.
+     *    Target string of the chromosome.
      *    By default the chromosome has no target (target's an empty string).
      * @param alphabet
-     *    **(Optional)** Set of valid characters that can take every gene.
-     *    By default
-     *    `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !"%$&/()=?`{[]}\+~*#';.:,-_<>|@^'`.
+     *    Set of valid characters that can take every gene.
+     *    default: `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !"%$&/()=?`{[]}\+~*#';.:,-_<>|@^'`.
      */
     constructor(
         size: Int,
         aTarget: String = "",
-        alphabet: String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !\"%\$&/()=?`{[]}\\+~*#';.:,-_<>|@^'"
+        alphabet: String =
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !\"%\$&/()=?`{[]}\\+~*#';.:,-_<>|@^'"
     ) : this(size, aTarget, alphabet, null)
 
     /**
@@ -86,8 +85,8 @@ class CharChromosome : IChromosome<CharGene> {
      * Returns the string representation of an array of genes.
      */
     private fun toString(genes: Array<CharGene>): String {
-        val sb = StringBuilder()
-        for (gene in genes) sb.append(gene.toString())
-        return sb.toString()
+        val builtString = StringBuilder()
+        for (gene in genes) builtString.append(gene.toString())
+        return builtString.toString()
     }
 }
