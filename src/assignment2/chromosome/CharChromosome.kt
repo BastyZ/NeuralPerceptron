@@ -42,7 +42,7 @@ class CharChromosome : IChromosome<CharGene> {
     ) {
         this.alphabet = alphabet
         this.genes = when (genes) {
-            null -> Array(aTarget.length) { i -> CharGene(aTarget[i], alphabet) }
+            null -> Array(aTarget.length) { i -> CharGene(alphabet) }
             else -> Array(size) { i -> genes[i] }
         }
         this.target = Array(aTarget.length) { i -> CharGene(aTarget[i], alphabet) }
