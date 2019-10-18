@@ -1,7 +1,5 @@
 package assignment2.gene
 
-import com.sun.corba.se.impl.io.TypeMismatchException
-
 /**
  * Genes are the basic elements of the `assignment 2` package.
  * They contain the actual information of the individuals of a population.
@@ -20,5 +18,6 @@ interface IGene<out DNA> {
     fun copyTo(other: IGene<*>)
 
     abstract fun copyFromCharGene(other: CharGene)
+    abstract fun copyFromBoxGene(other: BoxGene)
 
 }
