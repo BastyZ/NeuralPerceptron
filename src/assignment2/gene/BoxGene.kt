@@ -1,5 +1,6 @@
 package assignment2.gene
 
+import assignment2.Box
 import kotlin.random.Random.Default.nextInt
 
 class BoxGene: IGene<Box> {

@@ -1,4 +1,4 @@
-package assignment2.gene
+package assignment2
 
 enum class Box(weight: Int, value: Int) {
     ONE(12, 4),
