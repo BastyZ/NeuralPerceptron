@@ -6,16 +6,18 @@ fun main() {
     /**
      * Ejecuta el ejercicio de encontrar una palabra o frase
      */
-    val phrase: String = "Welcome to Kotlin!"
+    val phrase: String = "10101010101010110110111010101010101010101010101010101010101011"
+    val alphabet: String = "01"
 
     val factory = BeingFactory(
         factories = *arrayOf(CharChromosomeFactory(
             phrase.length,
-            phrase
+            phrase,
+            alphabet
             )),
         mutationRate = .2,
-        fitnessFunction = ::phraseFitness,
-        filterFunction = ::phraseFilter
+        fitnessFunction = ::bitsFitness,
+        filterFunction = ::bitsFilter
     )
 
     val population = Population(10000, factory)
@@ -33,7 +35,7 @@ fun main() {
     println("The best guess is: ${population.getFittest().toString()} in generation $generation")
 }
 
-fun phraseFitness(being: Being): DoubleArray {
+fun bitsFitness(being: Being): DoubleArray {
     var guessQuality = 0.0
     val chromosome = being.genotype[0]
     for ( gene in chromosome.genes.withIndex()) {
@@ -42,6 +44,6 @@ fun phraseFitness(being: Being): DoubleArray {
     return doubleArrayOf(guessQuality)
 }
 
-fun phraseFilter(being: Being) {
+fun bitsFilter(being: Being) {
 
 }
