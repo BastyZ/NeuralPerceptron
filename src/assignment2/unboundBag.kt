@@ -2,6 +2,7 @@ package assignment2
 
 import assignment2.chromosome.BoxChromosomeFactory
 import assignment2.gene.BoxGene
+import kotlin.math.abs
 
 fun main() {
     /**
@@ -21,13 +22,12 @@ fun main() {
         filterFunction = ::boxFilter
     )
 
-    val population = Population(10000, factory)
-    var fittest = population.getFittest()
+    val population = Population(1000, factory)
 
     var bestFit = doubleArrayOf(0.0)
     var generation = 0
-    // TODO edit
-    while (generation != 10000) {
+
+    while ( abs(bestFit[0] - 36) < .2) {
         population.evolve()
         bestFit = population.getFittest().fitness
         println(" :: Gen: $generation | Fit ${bestFit[0]} | Best Guess is ${population.getFittest().toString()}")
@@ -38,7 +38,19 @@ fun main() {
 }
 
 fun boxFitness(being: Being): DoubleArray {
+    val genotype = being.genotype[0]
+    var weight = 0
+    var value = 0
+    for (boxGene in genotype.genes) {
+        val box = boxGene.dna as Box
+        weight += box.weight
+        value += box.value
+    }
 
+    return when {
+        weight > 15 -> doubleArrayOf(0.0)
+        else        -> doubleArrayOf(value.toDouble())
+    }
 }
 
 fun boxFilter(being: Being) {
