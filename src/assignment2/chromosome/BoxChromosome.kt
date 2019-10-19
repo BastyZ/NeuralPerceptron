@@ -10,7 +10,7 @@ import kotlin.random.Random.Default.nextDouble
 class BoxChromosome : IChromosome<BoxGene> {
     private val alphabet: Array<Box>
     override val genes: Array<BoxGene>
-    override val target: Int
+    override val target: Array<BoxGene>
 
     /**
      * Create a new chromosome of the given `size`.
@@ -25,7 +25,7 @@ class BoxChromosome : IChromosome<BoxGene> {
      */
     constructor(
         size: Int,
-        aTarget: Int = 36,
+        aTarget: Array<BoxGene>,
         alphabet: Array<Box> = Box.values()
     ) : this(size, aTarget, alphabet, null)
 
@@ -35,7 +35,7 @@ class BoxChromosome : IChromosome<BoxGene> {
      */
     private constructor(
         size: Int,
-        aTarget: Int,
+        aTarget: Array<BoxGene>,
         alphabet: Array<Box> = Box.values(),
         genes: Array<BoxGene>?
     ) {
