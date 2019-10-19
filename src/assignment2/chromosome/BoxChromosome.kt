@@ -57,7 +57,7 @@ class BoxChromosome : IChromosome<BoxGene> {
     }
 
     override fun copy(): BoxChromosome {
-        val genesCopy = Array(genes.size) { i -> genes[i].copy() }
+        val genesCopy: Array<BoxGene> = Array(genes.size) { i -> genes[i].copy() }
         return BoxChromosome(size, target, alphabet, genesCopy)
     }
 
