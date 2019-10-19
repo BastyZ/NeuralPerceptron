@@ -14,7 +14,7 @@ fun main() {
         factories = *arrayOf(
             BoxChromosomeFactory(
                 phrase.size,
-                Array<BoxGene>(phrase.size) { BoxGene(phrase[it], Box.values()) }
+                Array<BoxGene>(phrase.size) { BoxGene(Box.values()) }
             )
         ),
         mutationRate = .2,
@@ -22,19 +22,28 @@ fun main() {
         filterFunction = ::boxFilter
     )
 
-    val population = Population(1000, factory)
+    val population = Population(6, factory)
 
     var bestFit = doubleArrayOf(0.0)
     var generation = 0
 
-    while ( abs(bestFit[0] - 36) < .2) {
+    while ( abs(bestFit[0]) < 36.0) {
         population.evolve()
         bestFit = population.getFittest().fitness
         println(" :: Gen: $generation | Fit ${bestFit[0]} | Best Guess is ${population.getFittest().toString()}")
         generation++
     }
 
-    println("The best guess is: ${population.getFittest().toString()} in generation $generation")
+    val winner = population.getFittest().genotype[0].genes
+    var weight = 0
+    var value = 0
+    for (boxGene in winner) {
+        val box = boxGene.dna as Box
+        weight += box.weight
+        value += box.value
+    }
+    println("The best guess is: ${population.getFittest().toString()} in generation $generation \n" +
+            "  with weight $weight and value $value")
 }
 
 fun boxFitness(being: Being): DoubleArray {
