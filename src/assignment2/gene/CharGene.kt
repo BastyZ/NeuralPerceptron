@@ -3,6 +3,10 @@ package assignment2.gene
 import kotlin.random.Random.Default.nextInt
 
 class CharGene: IGene<Char> {
+    override fun copyFromBoxGene(other: BoxGene) {
+
+    }
+
     internal var alphabet: String
     override var dna: Char
         private set

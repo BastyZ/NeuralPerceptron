@@ -72,7 +72,7 @@ class BoxGene: IGene<Box> {
     /**
      * Returns a string representation of this gene.
      */
-    override fun toString() = dna.toString()
+    override fun toString() = "$dna(${dna.weight}, ${dna.value}) "
 
     fun replaceWith(value: Box) {
         dna = value
