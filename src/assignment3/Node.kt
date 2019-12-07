@@ -1,9 +1,17 @@
 package assignment3
 
+import kotlin.reflect.jvm.reflect
+
+// util fun desde https://kotlinlang.org/docs/reference/reflection.html
+// sirve para entregar info de la funcion, como el nombre, o sus parametros
+fun funArgsCount(aFun: Function<Any>): Int {
+    return aFun.reflect()!!.parameters.size
+}
+
 data class Node(var function: (Node, Node) -> Unit, var father: Node? = null) {
     // la clase recibe dos argumentos y retorna uno
     private var arguments: MutableList<Node> = mutableListOf<Node>()
-    private var numArguments = 2
+    private var numArguments = funArgsCount(function)
 
     fun eval() {
         check( arguments.size == numArguments ) {"La cantidad de argumentos no calza con la de argumentos"}
