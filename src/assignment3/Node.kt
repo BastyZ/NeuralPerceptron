@@ -1,6 +1,7 @@
 package assignment3
 
 import kotlin.reflect.jvm.reflect
+import assignment3.Node as Node
 
 // util fun desde https://kotlinlang.org/docs/reference/reflection.html
 // sirve para entregar info de la funcion, como el nombre, o sus parametros
@@ -8,26 +9,30 @@ fun funArgsCount(aFun: Function<Any>): Int {
     return aFun.reflect()!!.parameters.size
 }
 
-data class Node(var function: (Node, Node) -> Unit, var father: Node? = null) {
+open class Node(var function: ((Node, Node) -> Int)?, var father: Node? = null) {
     // la clase recibe dos argumentos y retorna uno
-    private var arguments: MutableList<Node> = mutableListOf<Node>()
-    private var numArguments = funArgsCount(function)
+    var arguments: MutableList<Node> = mutableListOf<Node>()
+    open var numArguments = when (function) {
+        null -> 0
+        else -> funArgsCount(function!!)
+    }
 
-    fun eval() {
+    open fun eval(): Int {
         check( arguments.size == numArguments ) {"La cantidad de argumentos no calza con la de argumentos"}
-        return this.function(arguments.first(), arguments.last())
+        check(function != null) {"la función es nula"}
+        return this.function!!(arguments.first(), arguments.last())
     }
 
     fun serialize(): MutableList<Any> {
-        var list: MutableList<Any> = mutableListOf(this)
+        val list: MutableList<Any> = mutableListOf(this)
         for (node in this.arguments) {
             list.add(node.serialize())
         }
         return list
     }
 
-    fun copy(): Node{
-        // TODO add deepcopy
+    fun copy(): Node {
+        // TODO add deepcopy if necessary
         val aNode = Node(this.function, this.father)
         aNode.arguments = this.arguments
         return aNode
@@ -39,3 +44,35 @@ data class Node(var function: (Node, Node) -> Unit, var father: Node? = null) {
         this.numArguments = otherNode.numArguments
     }
 }
+
+class BinaryNode(
+    function: (Node, Node) -> Int,
+    father: Node? = null,
+    var left: Node,
+    var right: Node
+): Node(function = function, father = father) {
+    override var numArguments = 2
+    init {
+        super.arguments.add(left)
+        super.arguments.add(right)
+    }
+
+    override fun toString(): String {
+        return function.toString()
+    }
+}
+
+class TerminalNode(father: Node? = null, val value: Int)
+    : Node(null, father) {
+    /**
+     *  Represents the leaf of a tree
+     */
+    override fun eval(): Int {
+        return value
+    }
+
+    override fun toString(): String {
+        return this.value.toString()
+    }
+}
+
