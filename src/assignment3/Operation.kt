@@ -1,6 +1,7 @@
 package assignment3
 
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  *  Using the function-type interface as shown here:
@@ -29,17 +30,17 @@ class maxFun(val a: Node, val b: Node): (Node, Node) -> Int {
 }
 
 class minFun(val a: Node, val b: Node): (Node, Node) -> Int {
-    override fun invoke(a: Node, b: Node): Int = a.eval() + b.eval()
+    override fun invoke(a: Node, b: Node): Int = min(a.eval(), b.eval())
     override fun toString(): String = "min(${this.a}, ${this.b})"
 }
 
 class multFun(val a: Node, val b: Node): (Node, Node) -> Int {
-    override fun invoke(a: Node, b: Node): Int = a.eval() + b.eval()
+    override fun invoke(a: Node, b: Node): Int = a.eval() * b.eval()
     override fun toString(): String = "${this.a} * ${this.b}"
 }
 
 class divFun(val a: Node, val b: Node): (Node, Node) -> Int {
     // Todo: hacer caso division cero
-    override fun invoke(a: Node, b: Node): Int = a.eval() + b.eval()
+    override fun invoke(a: Node, b: Node): Int = a.eval() / b.eval()
     override fun toString(): String = "${this.a} / ${this.b}"
 }
