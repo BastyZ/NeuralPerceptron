@@ -9,6 +9,8 @@ import kotlin.math.max
  *  And overriding 'toString()' to make it look pretty after
  *
  *  PS: I did'nt want and try to do it for N nodes, sounds too messy for the function types
+ *
+ *  PS2: Believe me, this is the most __beautiful__ way to do this
  */
 
 class addFun(val a: Node, val b: Node): (Node, Node) -> Int {
