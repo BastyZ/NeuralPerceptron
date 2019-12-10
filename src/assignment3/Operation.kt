@@ -40,7 +40,12 @@ class multFun(val a: Node, val b: Node): (Node, Node) -> Int {
 }
 
 class divFun(val a: Node, val b: Node): (Node, Node) -> Int {
-    // Todo: hacer caso division cero
-    override fun invoke(a: Node, b: Node): Int = a.eval() / b.eval()
+    override fun invoke(a: Node, b: Node): Int {
+        return when (b.eval()) {
+            // we handle the division by zero throwing the appropriate exception
+            0 -> throw ArithmeticException("/ by zero")
+            else -> a.eval() / b.eval()
+        }
+    }
     override fun toString(): String = "${this.a} / ${this.b}"
 }
