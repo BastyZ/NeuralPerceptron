@@ -3,14 +3,13 @@ package assignment3
 import kotlin.reflect.jvm.reflect
 import assignment3.Node as Node
 
-// util fun desde https://kotlinlang.org/docs/reference/reflection.html
-// sirve para entregar info de la funcion, como el nombre, o sus parametros
+// util fun from https://kotlinlang.org/docs/reference/reflection.html
+// it is useful to access metadata of the function, like name, or it's parameters
 fun funArgsCount(aFun: Function<Any>): Int {
     return aFun.reflect()!!.parameters.size
 }
 
-open class Node(var function: ((Node, Node) -> Int)?, var father: Node? = null) {
-    // la clase recibe dos argumentos y retorna uno
+open class Node(var function: ((Node, Node) -> Int)?) {
     var arguments: MutableList<Node> = mutableListOf<Node>()
     open var numArguments = when (function) {
         null -> 0
@@ -32,8 +31,7 @@ open class Node(var function: ((Node, Node) -> Int)?, var father: Node? = null) 
     }
 
     fun copy(): Node {
-        // TODO add deepcopy if necessary
-        val aNode = Node(this.function, this.father)
+        val aNode = Node(this.function)
         aNode.arguments = this.arguments
         return aNode
     }
@@ -47,10 +45,9 @@ open class Node(var function: ((Node, Node) -> Int)?, var father: Node? = null) 
 
 class BinaryNode(
     function: (Node, Node) -> Int,
-    father: Node? = null,
     var left: Node,
     var right: Node
-): Node(function = function, father = father) {
+): Node(function = function) {
     override var numArguments = 2
     init {
         super.arguments.add(left)
@@ -62,8 +59,8 @@ class BinaryNode(
     }
 }
 
-class TerminalNode(father: Node? = null, val value: Int)
-    : Node(null, father) {
+class TerminalNode(val value: Int)
+    : Node(null) {
     /**
      *  Represents the leaf of a tree
      */
