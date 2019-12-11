@@ -3,9 +3,9 @@ package assignment3
 import kotlin.random.Random.Default.nextDouble
 
 class Ast(
-    val allowedFunctions: MutableList<(Node, Node) -> Int>,
+    internal val allowedFunctions: MutableList<(Node, Node) -> Int>,
     internal val allowedTerminalValues: MutableList<Int>,
-    val terminalNodeProbability: Double = 0.3
+    internal val terminalNodeProbability: Double = 0.3
 ) {
     fun invoke(maxDepth: Int): Node {
         // aux fun
