@@ -1,6 +1,6 @@
 package assignment3
 
-import kotlin.random.Random
+import kotlin.random.Random.Default.nextDouble
 
 class Ast(
     val allowedFunctions: MutableList<(Node, Node) -> Int>,
@@ -18,7 +18,7 @@ class Ast(
                     val children: List<Node> = List(2) {
                         // there is a possibility of don't keep creating sub-trees
                         // for the entire eternity
-                        when (Random.nextInt() < terminalNodeProbability) {
+                        when (nextDouble() < terminalNodeProbability) {
                             true -> createRecTree(0)
                             false -> createRecTree(depth - 1)
                         }
