@@ -36,7 +36,6 @@ class Ast(
             }
         }
 
-        rootNode = createRecTree(maxDepth)
-        return rootNode
+        return createRecTree(maxDepth)
     }
 }
