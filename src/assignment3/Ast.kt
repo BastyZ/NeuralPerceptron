@@ -7,6 +7,8 @@ class Ast(
     internal val allowedTerminalValues: MutableList<Int>,
     internal val terminalNodeProbability: Double = 0.3
 ) {
+    lateinit var rootNode: Node
+
     fun invoke(maxDepth: Int): Node {
         // aux fun
          fun createRecTree(depth:Int): Node {
@@ -31,6 +33,7 @@ class Ast(
             }
         }
 
-        return createRecTree(maxDepth)
+        rootNode = createRecTree(maxDepth)
+        return rootNode
     }
 }

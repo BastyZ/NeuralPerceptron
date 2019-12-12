@@ -17,8 +17,8 @@ open class Node(var function: ((Node, Node) -> Int)?) {
     }
 
     open fun eval(): Int {
-        check( arguments.size == numArguments ) {"La cantidad de argumentos no calza con la de argumentos"}
-        check(function != null) {"la función es nula"}
+        check( arguments.size == numArguments ) {"the arguments passed doesn't match the expected arguments"}
+        check(function != null) {"function is null"}
         return this.function!!(arguments.first(), arguments.last())
     }
 
