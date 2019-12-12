@@ -25,7 +25,7 @@ open class Node(var function: ((Node, Node) -> Int)?) {
     fun serialize(): MutableList<Any> {
         val list: MutableList<Any> = mutableListOf(this)
         for (node in this.arguments) {
-            list.add(node.serialize())
+            list.addAll(node.serialize())
         }
         return list
     }
