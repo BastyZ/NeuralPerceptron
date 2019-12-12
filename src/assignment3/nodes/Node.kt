@@ -1,7 +1,6 @@
-package assignment3.tree
+package assignment3.nodes
 
 import assignment3.funArgsCount
-import assignment3.tree.Node as Node
 
 open class Node(var function: ((Node, Node) -> Int)?) {
     var arguments: MutableList<Node> = mutableListOf<Node>()

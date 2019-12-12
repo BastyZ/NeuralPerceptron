@@ -1,4 +1,4 @@
-package assignment3.tree
+package assignment3.nodes
 
 
 class BinaryNode(

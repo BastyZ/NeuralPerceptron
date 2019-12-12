@@ -1,5 +1,8 @@
 package assignment3.tree
 
+import assignment3.nodes.BinaryNode
+import assignment3.nodes.Node
+import assignment3.nodes.TerminalNode
 import kotlin.random.Random.Default.nextDouble
 
 class Ast(
@@ -30,7 +33,11 @@ class Ast(
                     }
 
                     // we do not have (I think) unpacking here, be we know they're only two
-                    return BinaryNode(nodeFun, children.first(), children.last())
+                    return BinaryNode(
+                        nodeFun,
+                        children.first(),
+                        children.last()
+                    )
                 }
                 else -> return TerminalNode(value = allowedTerminalValues.random())
             }
