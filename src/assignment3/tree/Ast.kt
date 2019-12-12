@@ -1,4 +1,4 @@
-package assignment3
+package assignment3.tree
 
 import kotlin.random.Random.Default.nextDouble
 
@@ -7,6 +7,9 @@ class Ast(
     internal val allowedTerminalValues: MutableList<Int>,
     internal val terminalNodeProbability: Double = 0.3
 ) {
+    /**
+     * Abstract Syntax Tree made with Nodes
+     */
     lateinit var rootNode: Node
 
     fun invoke(maxDepth: Int): Node {

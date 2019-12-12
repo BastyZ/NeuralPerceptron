@@ -1,5 +1,6 @@
 package assignment3
 
+import assignment3.tree.Node
 import kotlin.math.max
 import kotlin.math.min
 
