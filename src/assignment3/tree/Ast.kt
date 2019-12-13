@@ -35,6 +35,7 @@ class Ast(
                     // we do not have (I think) unpacking here, be we know they're only two
                     return BinaryNode(
                         nodeFun,
+                        depth,
                         children.first(),
                         children.last()
                     )

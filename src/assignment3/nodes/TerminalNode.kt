@@ -1,7 +1,7 @@
 package assignment3.nodes
 
 class TerminalNode(val value: Int)
-    : Node(null) {
+    : Node(null, 0) {
     /**
      *  Represents the leaf of a tree
      */

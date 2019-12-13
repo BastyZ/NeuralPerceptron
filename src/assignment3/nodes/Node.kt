@@ -2,7 +2,7 @@ package assignment3.nodes
 
 import assignment3.funArgsCount
 
-open class Node(var function: ((Node, Node) -> Int)?) {
+open class Node(var function: ((Node, Node) -> Int)?, var depth: Int = 0) {
     var arguments: MutableList<Node> = mutableListOf<Node>()
     open var numArguments = when (function) {
         null -> 0
@@ -15,8 +15,8 @@ open class Node(var function: ((Node, Node) -> Int)?) {
         return this.function!!(arguments.first(), arguments.last())
     }
 
-    fun serialize(): MutableList<Any> {
-        val list: MutableList<Any> = mutableListOf(this)
+    fun serialize(): MutableList<Node> {
+        val list: MutableList<Node> = mutableListOf(this)
         for (node in this.arguments) {
             list.addAll(node.serialize())
         }
