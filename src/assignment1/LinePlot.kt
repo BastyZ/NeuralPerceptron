@@ -7,7 +7,13 @@ import org.knowm.xchart.style.markers.SeriesMarkers
  * @author Ignacio Slater Muñoz
  */
 class LinePlot(title: String, xLabel: String, yLabel: String, private val seriesName: String = "Success rate") {
-    private val plot = XYChartBuilder().width(800).height(600).title(title).xAxisTitle(xLabel).yAxisTitle(yLabel).build()
+    private val plot = XYChartBuilder()
+        .width(800)
+        .height(600)
+        .title(title)
+        .xAxisTitle(xLabel)
+        .yAxisTitle(yLabel)
+        .build()
     var yData: DoubleArray? = null
     var xData: DoubleArray? = null
     var y2Data: DoubleArray? = null
