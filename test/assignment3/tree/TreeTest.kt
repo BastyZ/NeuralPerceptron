@@ -34,6 +34,7 @@ internal class TreeTest {
         println("Description (depth: ${tree.root.depth}): $tree")
         assertNotNull(tree.root, "Tree is null")
         assertEquals(tree.depth, tree.root.depth, "Depth does not match")
+        println("------------------------------------------------------------------------")
     }
 
 }
