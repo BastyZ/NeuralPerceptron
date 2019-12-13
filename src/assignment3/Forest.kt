@@ -8,7 +8,7 @@ import kotlin.random.Random.Default.nextInt
 class Forest(
     val size: Int,
     chromosomeGenerator: Ast,
-    fitnessFun: (Node) -> Double,
+    fitnessFun: (Node) -> Int,
     depth: Int = 8
     ) {
 

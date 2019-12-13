@@ -4,7 +4,7 @@ import assignment3.nodes.Node
 
 class Tree(
     private val chromosomeGenerator: Ast,
-    var fitnessFun: (Node) -> Double,
+    var fitnessFun: (Node) -> Int,
     val depth: Int,
     baseRoot: Node?
     ): Comparable<Tree> {
@@ -17,7 +17,7 @@ class Tree(
         else -> baseRoot
     }
     var nodes: MutableList<Node> = mutableListOf()
-    var fitness: Double = Double.MIN_VALUE
+    var fitness: Int = Int.MIN_VALUE
 
     init {
         nodes = root.serialize()
@@ -27,7 +27,7 @@ class Tree(
     /** Constructor with no pre-defined root */
     constructor(
         chromosomeGenerator: Ast,
-        fitnessFun: (Node) -> Double,
+        fitnessFun: (Node) -> Int,
         depth: Int
     ) : this(chromosomeGenerator, fitnessFun, depth, baseRoot = null)
 

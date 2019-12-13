@@ -27,7 +27,7 @@ internal class ForestTest {
         forest = Forest(
             population,
             chromosomeGenerator,
-            fun(a: Node) = (Int.MIN_VALUE + abs(42 - a.eval())).toDouble(), // distance to 42
+            fun(a: Node) = Int.MAX_VALUE - abs(42 - a.eval()), // distance to 42
             4)
     }
 
@@ -48,8 +48,8 @@ internal class ForestTest {
         assertNotNull(forest.getFittest(), "Fittest is null")
         val fitness1 = forest.fittestFitness()
         forest.evolve()
-        println("We'll see if this forest improves (old fitness: $fitness1)")
-        println("new fitness: ${forest.fittestFitness()}")
+        println("We'll see if this forest improves (old fitness: ${fitness1.toInt()})")
+        println("new fitness: ${forest.fittestFitness().toInt()}           difference: ${forest.fittestFitness() - fitness1}")
         println("------------------------------------------------------------------------")
     }
 }
