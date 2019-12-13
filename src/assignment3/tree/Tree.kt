@@ -56,8 +56,9 @@ class Tree(
             nextInt(nodeToMutate.depth)
             ).root
 
+        // replace and update our serialization
         nodeToMutate.replace(newSubTree)
-        nodes = root.serialize() // updates the serialization of this tree
+        nodes = root.serialize()
     }
 
     private fun updateFitness() {
