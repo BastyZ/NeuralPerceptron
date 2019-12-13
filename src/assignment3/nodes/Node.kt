@@ -6,7 +6,7 @@ open class Node(var function: ((Node, Node) -> Int)?, var depth: Int = 0) {
     var arguments: MutableList<Node> = mutableListOf<Node>()
     open var numArguments = when (function) {
         null -> 0
-        else -> funArgsCount(function!!)
+        else -> 2 // I'm lazy and do not want to do magic
     }
 
     open fun eval(): Int {
