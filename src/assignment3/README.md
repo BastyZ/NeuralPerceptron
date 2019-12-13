@@ -5,3 +5,6 @@ Esta vez voy a asumir de frente que tiene cosas raras y hermosas de kotlin
 como las reflections de funciones, que en un principio pueden ser dificiles de
 entender, pero dejé link a la documentación junto al código para las cosas más complejas.
 
+Al imprimir el árbol este usa posfijo solo para evitar los casos en los que se hace distinto
+ (como min y max vs suma y resta)
+
