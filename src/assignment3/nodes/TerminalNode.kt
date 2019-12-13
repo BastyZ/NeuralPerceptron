@@ -1,6 +1,6 @@
 package assignment3.nodes
 
-class TerminalNode(val value: Int)
+class TerminalNode(override var value: Int)
     : Node(null, 0) {
     /**
      *  Represents the leaf of a tree

@@ -1,9 +1,11 @@
 package assignment3.nodes
 
-import assignment3.funArgsCount
+import kotlin.test.assertNotNull
+
 
 open class Node(var function: ((Node, Node) -> Int)?, var depth: Int = 0) {
     var arguments: MutableList<Node> = mutableListOf<Node>()
+    open var value: Int = 0
     open var numArguments = when (function) {
         null -> 0
         else -> 2 // I'm lazy and do not want to do magic
@@ -11,8 +13,11 @@ open class Node(var function: ((Node, Node) -> Int)?, var depth: Int = 0) {
 
     open fun eval(): Int {
         check( arguments.size == numArguments ) {"the arguments passed doesn't match the expected arguments"}
-        check(function != null) {"function is null"}
-        return this.function!!(arguments.first(), arguments.last())
+        when { // This is an special case, given that we cannot convert from TerminalNode to Node
+            function == null && depth == 0 -> return value
+        }
+        value = this.function!!(arguments.first(), arguments.last())
+        return value
     }
 
     fun serialize(): MutableList<Node> {
@@ -36,5 +41,7 @@ open class Node(var function: ((Node, Node) -> Int)?, var depth: Int = 0) {
         this.function = otherNode.function
         this.arguments = otherNode.arguments
         this.numArguments = otherNode.numArguments
+        this.depth = otherNode.depth
+        this.value = otherNode.value
     }
 }

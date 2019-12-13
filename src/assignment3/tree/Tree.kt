@@ -1,7 +1,6 @@
 package assignment3.tree
 
 import assignment3.nodes.Node
-import kotlin.random.Random.Default.nextInt
 
 class Tree(
     private val chromosomeGenerator: Ast,
@@ -18,11 +17,11 @@ class Tree(
         else -> baseRoot
     }
     var nodes: MutableList<Node> = mutableListOf()
-    var fitness: Double = Double.MAX_VALUE // the closer to zero the closer to the target value
+    var fitness: Double = Double.MIN_VALUE
 
     init {
-        this.eval() // this is to speed the process on testing (it can be donde by hand too)
         nodes = root.serialize()
+        this.eval() // this is to speed the process on testing (it can be donde by hand too)
     }
 
     /** Constructor with no pre-defined root */
@@ -37,7 +36,7 @@ class Tree(
         val chromosomeSample: Node = this.root.copy()
         // we pick a random node to do the crossover
         val mixingPoint: Node = chromosomeSample.serialize().random()
-        var newSubTree: Node? = null
+        var newSubTree: Node?
 
         // we pick a subtree that is less deep than the remaining depth (do..while loop)
         do newSubTree = other.nodes.random()
@@ -54,7 +53,7 @@ class Tree(
         val newSubTree: Node = Tree(
             chromosomeGenerator,
             fitnessFun,
-            nextInt(nodeToMutate.depth)
+            (0..nodeToMutate.depth).random() // random depth between the node one, and zero
             ).root
 
         // replace and update our serialization
