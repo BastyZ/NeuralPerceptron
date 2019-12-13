@@ -24,8 +24,11 @@ open class Node(var function: ((Node, Node) -> Int)?, var depth: Int = 0) {
     }
 
     fun copy(): Node {
-        val aNode = Node(this.function)
-        aNode.arguments = this.arguments
+        val aNode = Node(this.function, depth)
+        // we made copies of all children
+        aNode.arguments = mutableListOf<Node>()
+        this.arguments.forEach { aNode.arguments.add(it.copy()) }
+
         return aNode
     }
 
