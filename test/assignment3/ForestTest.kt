@@ -48,8 +48,8 @@ internal class ForestTest {
         assertNotNull(forest.getFittest(), "Fittest is null")
         val fitness1 = forest.fittestFitness()
         forest.evolve()
-        println("We'll see if this forest improves (old fitness: ${fitness1.toInt()})")
-        println("new fitness: ${forest.fittestFitness().toInt()}           difference: ${forest.fittestFitness() - fitness1}")
+        println("We'll see if this forest improves (old fitness: ${fitness1})")
+        println("new fitness: ${forest.fittestFitness()}           difference: ${forest.fittestFitness() - fitness1}")
         println("------------------------------------------------------------------------")
     }
 }

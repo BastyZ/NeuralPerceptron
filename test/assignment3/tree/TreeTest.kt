@@ -23,7 +23,7 @@ internal class TreeTest {
         val chromosomeGenerator: Ast = Ast(functions, values)
 
         // we are going to pass an anonymous function for testing purposes
-        tree = Tree(chromosomeGenerator, fun(a: Node) = a.eval().toDouble(), 4)
+        tree = Tree(chromosomeGenerator, fun(a: Node) = a.eval(), 4)
     }
 
     @Test
