@@ -21,7 +21,7 @@ class Tree(
     var fitness: Double = Double.MAX_VALUE // the closer to zero the closer to the target value
 
     init {
-        this.eval()
+        this.eval() // this is to speed the process on testing (it can be donde by hand too)
         nodes = root.serialize()
     }
 
