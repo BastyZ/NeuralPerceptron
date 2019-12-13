@@ -21,6 +21,7 @@ class Tree(
     var fitness: Double = Double.MAX_VALUE // the closer to zero the closer to the target value
 
     init {
+        this.eval()
         nodes = root.serialize()
     }
 
@@ -61,8 +62,17 @@ class Tree(
         nodes = root.serialize()
     }
 
+    fun eval(): Int {
+        updateFitness()
+        return root.eval()
+    }
+
     private fun updateFitness() {
         fitness = fitnessFun(this.root)
+    }
+
+    override fun toString(): String {
+        return root.toString()
     }
 
     override fun compareTo(other: Tree): Int {

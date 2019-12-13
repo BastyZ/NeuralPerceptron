@@ -14,6 +14,6 @@ class BinaryNode(
     }
 
     override fun toString(): String {
-        return function.toString()
+        return "(${function.toString()} $left $right)"
     }
 }

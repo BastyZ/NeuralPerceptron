@@ -16,70 +16,46 @@ import kotlin.math.min
  */
 
 class addFun: (Node, Node) -> Int {
-    lateinit var a: Node
-    lateinit var b: Node
     override fun invoke(a: Node, b: Node): Int {
-        this.a = a
-        this.b = b
         return a.eval() + b.eval()
     }
-    override fun toString(): String = "${this.a.eval().toString()} + ${this.b.eval().toString()}"
+    override fun toString(): String = "+"
 }
 
 class subFun: (Node, Node) -> Int {
-    lateinit var a: Node
-    lateinit var b: Node
     override fun invoke(a: Node, b: Node): Int {
-        this.a = a
-        this.b = b
         return a.eval() - b.eval()
     }
-    override fun toString(): String = "${this.a.eval().toString()} - ${this.b.eval().toString()}"
+    override fun toString(): String = "-"
 }
 
 class maxFun: (Node, Node) -> Int {
-    lateinit var a: Node
-    lateinit var b: Node
     override fun invoke(a: Node, b: Node): Int {
-        this.a = a
-        this.b = b
         return max(a.eval(), b.eval())}
-    override fun toString(): String = "max(${this.a.eval().toString()}, ${this.b.eval().toString()})"
+    override fun toString(): String = "max"
 }
 
 class minFun: (Node, Node) -> Int {
-    lateinit var a: Node
-    lateinit var b: Node
     override fun invoke(a: Node, b: Node): Int {
-        this.a = a
-        this.b = b
         return min(a.eval(), b.eval())
     }
-    override fun toString(): String = "min(${this.a.eval().toString()}, ${this.b.eval().toString()})"
+    override fun toString(): String = "min"
 }
 
 class multFun: (Node, Node) -> Int {
-    lateinit var a: Node
-    lateinit var b: Node
     override fun invoke(a: Node, b: Node): Int {
-        this.a = a
-        this.b = b
         return a.eval() * b.eval()
     }
-    override fun toString(): String = "${this.a.eval().toString()} * ${this.b.eval().toString()}"
+    override fun toString(): String = "*"
 }
 
 class divFun: (Node, Node) -> Int {
-    lateinit var a: Node
-    lateinit var b: Node
     override fun invoke(a: Node, b: Node): Int {
-        this.a = a
-        this.b = b
         return when (b.eval()) {
             // we handle the division by zero throwing the appropriate exception
             0 -> throw ArithmeticException("/ by zero")
             else -> a.eval() / b.eval()
         }
     }
-    override fun toString(): String = "${this.a.eval().toString()} / ${this.b.eval().toString()}"
+    override fun toString(): String = "/"
 }
