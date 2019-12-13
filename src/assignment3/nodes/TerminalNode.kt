@@ -9,6 +9,10 @@ class TerminalNode(val value: Int)
         return value
     }
 
+    override fun copy(): Node {
+        return TerminalNode(value)
+    }
+
     override fun toString(): String {
         return this.value.toString()
     }
