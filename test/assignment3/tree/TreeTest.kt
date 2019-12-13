@@ -28,9 +28,10 @@ internal class TreeTest {
 
     @Test
     fun build() {
+        println("-------------------------------Build Test-------------------------------")
         println("Generated tree: $tree")
         println("value: ${tree.eval()} | fitness: ${tree.fitness}")
-        println("Description (depth: ${tree.root.depth}): ${tree}")
+        println("Description (depth: ${tree.root.depth}): $tree")
         assertNotNull(tree.root, "Tree is null")
         assertEquals(tree.depth, tree.root.depth, "Depth does not match")
     }
