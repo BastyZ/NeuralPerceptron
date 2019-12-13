@@ -9,7 +9,8 @@ class Forest(
     val size: Int,
     chromosomeGenerator: Ast,
     fitnessFun: (Node) -> Int,
-    depth: Int = 8
+    depth: Int = 8,
+    val mutationRate: Double = 0.1
     ) {
 
     private var trees: MutableList<Tree>
@@ -34,7 +35,11 @@ class Forest(
 
                     children.addAll(doubleCrossover(parentOne, parentTwo))
                 }
-                else -> children.add(trees[index++])
+                else -> {
+                    // they can mutate too
+                    trees[index].mutate(mutationRate)
+                    children.add(trees[index++])
+                }
             }
         }
         // we establish the new generation of trees
@@ -45,15 +50,15 @@ class Forest(
     /** Returns the fittest individual. */
     fun getFittest() = trees.last() // the get sorted from minor to major on fitness
 
-    /** Returns the best fitness */
+    /** Returns the best fitness from all trees */
     fun fittestFitness() = getFittest().fitness
 
     private fun doubleCrossover(aTree: Tree, otherTree: Tree): List<Tree> {
         /** Performs two crossovers between two trees */
         val one = aTree.crossover(otherTree)
         val other = otherTree.crossover(aTree)
-        one.mutate()
-        other.mutate()
+        one.mutate(mutationRate)
+        other.mutate(mutationRate)
         return listOf(one, other)
     }
 

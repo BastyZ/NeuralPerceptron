@@ -1,6 +1,7 @@
 package assignment3.tree
 
 import assignment3.nodes.Node
+import kotlin.random.Random.Default.nextDouble
 
 class Tree(
     private val chromosomeGenerator: Ast,
@@ -47,18 +48,20 @@ class Tree(
         return Tree(chromosomeGenerator, fitnessFun, depth, chromosomeSample)
     }
 
-    fun mutate() {
+    fun mutate(mutationRate: Double) {
         /** Mutates the tree chromosome using a new sub-tree as a base. */
-        val nodeToMutate: Node = nodes.random()
-        val newSubTree: Node = Tree(
-            chromosomeGenerator,
-            fitnessFun,
-            (0..nodeToMutate.depth).random() // random depth between the node one, and zero
+        if (nextDouble() < mutationRate) {
+            val nodeToMutate: Node = nodes.random()
+            val newSubTree: Node = Tree(
+                chromosomeGenerator,
+                fitnessFun,
+                (0..nodeToMutate.depth).random() // random depth between the node one, and zero
             ).root
 
-        // replace and update our serialization
-        nodeToMutate.replace(newSubTree)
-        nodes = root.serialize()
+            // replace and update our serialization
+            nodeToMutate.replace(newSubTree)
+            nodes = root.serialize()
+        }
     }
 
     fun eval(): Int {

@@ -8,3 +8,5 @@ entender, pero dejé link a la documentación junto al código para las cosas m�
 Al imprimir el árbol este usa posfijo solo para evitar los casos en los que se hace distinto
  (como min y max vs suma y resta)
 
+En esta carpeta hay un archivo main.kt que tendrá punteros a los
+ejercicios realizados, que hasta ahora son 1, y que falla
