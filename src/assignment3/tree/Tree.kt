@@ -47,7 +47,6 @@ class Tree(
         return Tree(chromosomeGenerator, fitnessFun, depth, chromosomeSample)
     }
 
-
     fun mutate() {
         /** Mutates the tree chromosome using a new sub-tree as a base. */
         val nodeToMutate: Node = nodes.random()
