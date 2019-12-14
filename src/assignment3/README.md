@@ -9,4 +9,9 @@ Al imprimir el árbol este usa posfijo solo para evitar los casos en los que se 
  (como min y max vs suma y resta)
 
 En esta carpeta hay un archivo main.kt que tendrá punteros a los
-ejercicios realizados, que hasta ahora son 1, y que falla
+ejercicios realizados, que hasta ahora es uno, y genera un grafico bonito.
+
+// image
+
+Además hice el analisis, pero no tengo la mas minima idea de como hacer un heatmap.
+ De todas formas la matriz existe asique podrian hacerlo si saben  (?)
