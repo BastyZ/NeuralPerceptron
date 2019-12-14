@@ -20,3 +20,15 @@ una poblacion de 600, 15 de profundidad, y ratio de mutacion de 0.2
  
 Además hice el analisis, pero no tengo la mas minima idea de como hacer un heatmap.
  De todas formas la matriz existe asique podrian hacerlo si saben  (?)
+
+Así que deje un mensaje con la mejor combinación encontrada según el tiempo
+que se demoraba en entontrar la respuesta 10 veces o llegar a las 2000 generaciones.
+Imprime mucho pero es básicamente porque se demora bastante (su media hora
+(¿alguien dijo logaritmos..?)), asíque en el tiempo que 
+tardaba le hice una clase de UI bonita.
+```
+La mejor combinación es: 
+	 población: 50 
+	 ratio de mutacion: 0.4 
+	 con un tiempo de 219
+```
