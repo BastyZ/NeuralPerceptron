@@ -22,7 +22,7 @@ fun main() {
     // You can use ctrl + B to jump to the exercise function
 
     // I do not know how to work when the best fitness is zero, so I'll work around that
-    //::analysis.invoke()
+    ::analysis.invoke()
     ::withoutRepetitionLimits.invoke()
 }
 
