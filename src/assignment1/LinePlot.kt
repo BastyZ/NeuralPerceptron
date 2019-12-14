@@ -28,4 +28,13 @@ class LinePlot(title: String, xLabel: String, yLabel: String, private val series
         line2.marker = SeriesMarkers.NONE
         line.marker = SeriesMarkers.NONE
     }
+
+    fun drawOneLine() {
+        if (xData == null) xData = DoubleArray(yData!!.size) { i -> i.toDouble()}
+        assert(xData!!.size == yData!!.size)
+        SwingWrapper(plot).displayChart()
+        print("success points ${yData!!.size}")
+        val line = plot.addSeries(seriesName, xData, yData)
+        line.marker = SeriesMarkers.NONE
+    }
 }

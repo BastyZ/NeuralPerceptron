@@ -61,6 +61,7 @@ class Tree(
             // replace and update our serialization
             nodeToMutate.replace(newSubTree)
             nodes = root.serialize()
+            this.eval()
         }
     }
 
