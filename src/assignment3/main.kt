@@ -1,5 +1,7 @@
 package assignment3
 
+import assignment3.exercise.analysis
+import assignment3.exercise.withoutRepetitionLimits
 import assignment3.nodes.Node
 
 
@@ -20,7 +22,7 @@ fun main() {
     // You can use ctrl + B to jump to the exercise function
 
     // I do not know how to work when the best fitness is zero, so I'll work around that
-
+    ::analysis.invoke()
     ::withoutRepetitionLimits.invoke()
 }
 

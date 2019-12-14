@@ -1,6 +1,7 @@
-package assignment3
+package assignment3.exercise
 
 import LinePlot
+import assignment3.*
 import assignment3.nodes.Node
 import assignment3.tree.Ast
 import kotlin.math.abs
@@ -24,7 +25,8 @@ fun withoutRepetitionLimits() {
     fun noRepetitionFitness(a: Node) = 65346 - abs(65346 - a.eval())
 
     // ahora si creamos el bosque
-    val forest = Forest(population, generator, ::noRepetitionFitness, depth, mutationRate)
+    val forest =
+        Forest(population, generator, ::noRepetitionFitness, depth, mutationRate)
 
     // meta de las corridas
     var gen = 0
