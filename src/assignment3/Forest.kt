@@ -7,15 +7,21 @@ import kotlin.random.Random.Default.nextInt
 
 class Forest(
     val size: Int,
-    chromosomeGenerator: Ast,
-    fitnessFun: (Node) -> Int,
-    depth: Int = 8,
+    val chromosomeGenerator: Ast,
+    val fitnessFun: (Node) -> Int,
+    val depth: Int = 8,
     val mutationRate: Double = 0.1
     ) {
 
     private var trees: MutableList<Tree>
 
     init {
+        // We create a list of trees with them initialized
+        trees = MutableList(size) { Tree(chromosomeGenerator, fitnessFun, depth) }
+        trees.sort() // they get sorted by fitness (see CompareTo on Tree.kt)
+    }
+
+    fun reset(){
         // We create a list of trees with them initialized
         trees = MutableList(size) { Tree(chromosomeGenerator, fitnessFun, depth) }
         trees.sort() // they get sorted by fitness (see CompareTo on Tree.kt)
