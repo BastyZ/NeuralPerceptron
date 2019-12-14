@@ -33,5 +33,9 @@ La mejor combinación es (con profundidad 15):
 	 con un tiempo de 219
 ```
 
+Si se cambia en Analysis.kt linea 87 `time` por `minGen.toLong()` se puede ver
+el análisis usando como parametro la combinación que demora menos en converger
+aunque no estoy seguro de que tan metrica sea por lo random.
+
 Los arboles limitan su crecimiento por diseño, me di cuenta bastante despues de que
 el como lo hice solucionaba el problema planteado en uno de los ejercicios.

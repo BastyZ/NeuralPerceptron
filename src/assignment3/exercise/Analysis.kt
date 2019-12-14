@@ -65,6 +65,7 @@ private fun minOf(an: Array2D<Long>): Triple<Int, Int, Long> {
 
 private fun reachFitness(forest: Forest): Long {
     println("Comenzando para size:${forest.size} y rate: ${forest.mutationRate}")
+    var minGen = 0
     val time = measureTimeMillis {
         repeat(20) {
             // we are doing the minimum of 10 times for each config
@@ -77,6 +78,7 @@ private fun reachFitness(forest: Forest): Long {
                 gen++
             } while (forest.fittestFitness() != 65346 && gen < 500)
             print("\n")
+            minGen = gen
             // before starting over we make another forest
             forest.reset()
         }
