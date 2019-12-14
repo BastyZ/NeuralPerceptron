@@ -12,7 +12,7 @@ En esta carpeta hay un archivo main.kt que tendrá punteros a los
 ejercicios realizados, que hasta ahora es uno, y genera un grafico bonito.
 
 Este corresponde al ejercicio sin limite de reposición con
-una poblacion de 600, y ratio de mutacion de 0.2 
+una poblacion de 600, 15 de profundidad, y ratio de mutacion de 0.2 
 
 <center>
  <img src="https://github.com/BastyZ/NeuralPerceptron/blob/master/src/assignment3/images/noRepLimit.jpg" alt="Ejercicio 1">
