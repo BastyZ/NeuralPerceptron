@@ -32,3 +32,6 @@ La mejor combinación es (con profundidad 15):
 	 ratio de mutacion: 0.4 
 	 con un tiempo de 219
 ```
+
+Los arboles limitan su crecimiento por diseño, me di cuenta bastante despues de que
+el como lo hice solucionaba el problema planteado en uno de los ejercicios.

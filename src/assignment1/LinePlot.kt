@@ -6,7 +6,7 @@ import org.knowm.xchart.style.markers.SeriesMarkers
  * Class to create the plot, used to show the results of training
  * @author Ignacio Slater Muñoz
  */
-class LinePlot(title: String, xLabel: String, yLabel: String, private val seriesName: String = "Success rate") {
+class LinePlot(val title: String, xLabel: String, yLabel: String, private val seriesName: String = "Success rate") {
     private val plot = XYChartBuilder()
         .width(800)
         .height(600)
@@ -33,8 +33,8 @@ class LinePlot(title: String, xLabel: String, yLabel: String, private val series
         if (xData == null) xData = DoubleArray(yData!!.size) { i -> i.toDouble()}
         assert(xData!!.size == yData!!.size)
         SwingWrapper(plot).displayChart()
-        print("success points ${yData!!.size}")
         val line = plot.addSeries(seriesName, xData, yData)
         line.marker = SeriesMarkers.NONE
+        print("showing $title")
     }
 }

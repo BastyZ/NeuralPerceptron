@@ -66,7 +66,7 @@ private fun minOf(an: Array2D<Long>): Triple<Int, Int, Long> {
 private fun reachFitness(forest: Forest): Long {
     println("Comenzando para size:${forest.size} y rate: ${forest.mutationRate}")
     val time = measureTimeMillis {
-        repeat(10) {
+        repeat(20) {
             // we are doing the minimum of 10 times for each config
             var gen = 0
             // do while .... feeling old ?
