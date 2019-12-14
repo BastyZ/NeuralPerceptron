@@ -41,7 +41,7 @@ fun analysis() {
     ) }
 
     val (x, y, minimum) = minOf(matrix)
-    println("La mejor combinación es (con depth $depth): \n" +
+    println("La mejor combinación es (con profundidad $depth): \n" +
             "\t población: ${population[x]} \n" +
             "\t ratio de mutacion: ${mutationRate[y]} \n" +
             "\t con un tiempo de $minimum")

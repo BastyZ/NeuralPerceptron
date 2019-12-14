@@ -27,7 +27,7 @@ Imprime mucho pero es básicamente porque se demora bastante (su media hora
 (¿alguien dijo logaritmos..?)), asíque en el tiempo que 
 tardaba le hice una clase de UI bonita.
 ```
-La mejor combinación es: 
+La mejor combinación es (con profundidad 15): 
 	 población: 50 
 	 ratio de mutacion: 0.4 
 	 con un tiempo de 219
