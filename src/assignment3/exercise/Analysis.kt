@@ -13,17 +13,22 @@ fun analysis() {
     val population: List<Int> = List(20) {index: Int -> 50 * (index + 1) }
     val depth = 15
     val mutationRate: List<Double> = List(10) {index: Int -> 0.1 * index }
+
+    // esto es lo mismo que el analisis sin repeticion pero con mas casos
+    val terminals: MutableList<Int> = mutableListOf(25, 7, 8, 100, 4, 2)
+    // el generador y funciones se mantienen
     val functions: MutableList<(Node, Node) -> Int> = mutableListOf(
         addFun(),
         subFun(),
         multFun(),
         maxFun()
     )
-    val terminals: MutableList<Int> = mutableListOf(25, 7, 8, 100, 4, 2)
     val generator = Ast(functions, terminals, terminalNodeProbability = 0.4)
     // funcion de fitness
     fun noRepetitionFitness(a: Node) = 65346 - abs(65346 - a.eval())
 
+    println("generating matrix")
+    // Creamos una matriz y corremos reachFitness con cada configuración correspondiente
     val matrix: Array2D<Long> = Array2D(population.size, mutationRate.size) {
             x: Int, y: Int -> reachFitness(
         Forest(
@@ -59,7 +64,7 @@ private fun minOf(an: Array2D<Long>): Triple<Int, Int, Long> {
 }
 
 private fun reachFitness(forest: Forest): Long {
-    return measureTimeMillis {
+    val time = measureTimeMillis {
         repeat(10) {
             // we are doing the minimum of 10 times for each config
             // do while .... feeling old ?
@@ -68,4 +73,6 @@ private fun reachFitness(forest: Forest): Long {
             } while (forest.fittestFitness() != 65346)
         }
     }
+    println("Tiempo para size:${forest.size} y rate: ${forest.mutationRate} es $time")
+    return time
 }
